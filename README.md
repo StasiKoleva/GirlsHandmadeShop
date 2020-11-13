@@ -1,0 +1,2 @@
+# GirlsHandmadeShop
+ SoftUni Web Project
