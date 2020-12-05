@@ -4,28 +4,29 @@
     using System.Linq;
 
     using GirlsHandmadeShop.Data;
+    using GirlsHandmadeShop.Services.Data;
     using GirlsHandmadeShop.Web.ViewModels;
     using GirlsHandmadeShop.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext db;
+        private readonly IGetCountsService countsService;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(IGetCountsService countsService)
         {
-                this.db = db;
+            this.countsService = countsService;
         }
 
         public IActionResult Index()
         {
+            var countsDto = this.countsService.GetCounts();
+
             var viewModel = new IndexViewModel
             {
-                ProductsCount = this.db.Products.Count(),
-
-                CategoriesCount = this.db.Categories.Count(),
-
-                ImagesCount = this.db.Images.Count(),
+                ProductsCount = countsDto.ProductsCount,
+                CategoriesCount = countsDto.CategoriesCount,
+                ImagesCount = countsDto.ImagesCount,
             };
             return this.View(viewModel);
         }
