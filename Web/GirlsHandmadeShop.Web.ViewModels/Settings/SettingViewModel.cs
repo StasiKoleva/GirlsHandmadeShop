@@ -1,9 +1,8 @@
 ﻿namespace GirlsHandmadeShop.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using GirlsHandmadeShop.Data.Models;
     using GirlsHandmadeShop.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {
