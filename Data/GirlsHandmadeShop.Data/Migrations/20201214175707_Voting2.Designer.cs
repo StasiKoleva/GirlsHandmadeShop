@@ -4,14 +4,16 @@ using GirlsHandmadeShop.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GirlsHandmadeShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201214175707_Voting2")]
+    partial class Voting2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,7 +254,7 @@ namespace GirlsHandmadeShop.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddedByUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Availability")
                         .HasColumnType("nvarchar(max)");
@@ -282,8 +284,6 @@ namespace GirlsHandmadeShop.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddedByUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -487,10 +487,6 @@ namespace GirlsHandmadeShop.Data.Migrations
 
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Product", b =>
                 {
-                    b.HasOne("GirlsHandmadeShop.Data.Models.ApplicationUser", "AddedByUser")
-                        .WithMany()
-                        .HasForeignKey("AddedByUserId");
-
                     b.HasOne("GirlsHandmadeShop.Data.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")

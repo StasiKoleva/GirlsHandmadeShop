@@ -15,10 +15,7 @@
 					@Model.CreatedOn.ToShortDateString()
 				</li>
 				<li class="single-meta">
-					<i class="fas fa-user"></i> by
-					
-						<span>@Model.AddedByUserEmail</span>
-					
+					<i class="fas fa-user"></i> by @Model.AddedByUserEmail
 				</li>
 				<li class="single-meta">
 					<ul class="item-rating">
@@ -33,7 +30,7 @@
 				@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
 				{
 					<li class="single-meta">
-						<a asp-controller="Recipes" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+						<a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
 					</li>
 					<li class="single-meta">
 						<form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
@@ -55,7 +52,63 @@
 	<div class="item-figure">
 		<img class="img-fluid w-100" src="@Model.ImageUrl" alt="@Model.Name" />
 	</div>
-
+	<div class="item-feature">
+		<ul>
+			<li>
+				<div class="feature-wrap">
+					<div class="media">
+						<div class="feature-icon">
+							<i class="far fa-clock"></i>
+						</div>
+						<div class="media-body space-sm">
+							<div class="feature-title">CREATED BY HAND FOR</div>
+							<div class="feature-sub-title">8-10 HOURS</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="feature-wrap">
+					<div class="media">
+						<div class="feature-icon">
+							<i class="fas fa-utensils"></i>
+						</div>
+						<div class="media-body space-sm">
+							<div class="feature-title">LOREM IPSUM</div>
+							<div class="feature-sub-title">LOREM IPSUM TEXT Mins</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="feature-wrap">
+					<div class="media">
+						<div class="feature-icon">
+							<i class="fas fa-users"></i>
+						</div>
+						<div class="media-body space-sm">
+							<div class="feature-title">LOREM IPSUM</div>
+							<div class="feature-sub-title">								
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="feature-wrap">
+					<div class="media">
+						<div class="feature-icon">
+							<i class="fa fa-list-ol"></i>
+						</div>
+						<div class="media-body space-sm">
+							<div class="feature-title">CATEGORY PRODUCTS</div>
+							<div class="feature-sub-title">@Model.CategoryProductsCount</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
 	<div class="making-elements-wrap">
 		<div class="row">
 			<div class="col-md-6">
@@ -63,7 +116,17 @@
 					@Model.Description
 				</p>
 			</div>
-		
+			<div class="col-md-6">
+				<div class="ingridients-wrap">
+					<h3 class="item-title"><i class="fas fa-list-ul"></i>Materials</h3>
+					@*@foreach (var material in Model.Materials)
+					{
+						<div class="checkbox checkbox-primary">
+							<label for="checkbox1">@material.Quantity @material.MaterialName</label>
+						</div>
+					}*@
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -73,9 +136,9 @@
         $("li[data-vote]").each(function (el) {
             $(this).click(function () {
                 var value = $(this).attr("data-vote");
-                var recipeId = @Model.Id;
+                var productId = @Model.Id;
                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-                var data = { recipeId: recipeId, value: value };
+				var data = { productId: productId, value: value };
                 $.ajax({
                     type: "POST",
                     url: "/api/Votes",
