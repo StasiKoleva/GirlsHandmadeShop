@@ -10,6 +10,7 @@
     using GirlsHandmadeShop.Data.Common.Models;
     using GirlsHandmadeShop.Data.Common.Repositories;
     using GirlsHandmadeShop.Data.Models;
+    using GirlsHandmadeShop.Services.Mapping;
     using GirlsHandmadeShop.Web.ViewModels.Products;
 
     public class ProductsService : IProductsService
@@ -57,6 +58,29 @@
 
             await this.productsRepository.AddAsync(product);
             await this.productsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAll<T>(int page, int itemsPerPage = 12)
+        {
+            var products = this.productsRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                .To<T>().ToList();
+            return products;
+        }
+
+        public int GetCount()
+        {
+            return this.productsRepository.All().Count();
+        }
+
+        public T GetById<T>(int id)
+        {
+            var product = this.productsRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+
+            return product;
         }
     }
 }

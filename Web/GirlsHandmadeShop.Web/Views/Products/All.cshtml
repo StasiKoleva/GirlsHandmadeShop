@@ -1,0 +1,26 @@
+﻿@model GirlsHandmadeShop.Web.ViewModels.Products.ProductsListViewModel
+@{
+	this.ViewData["Title"] = "All Products, page " + Model.PageNumber;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+	<div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+<div class="row">
+	@foreach (var product in this.Model.Products)
+	{
+		<div class="media col-md-4">
+			<img src="@product.ImageUrl" width="100" class="mr-3 img-responsive">
+			<div class="media-body">
+				<h5 class="mt-0"><a asp-action="ById" asp-route-id="@product.Id">@product.Name</a></h5>
+				@product.CategoryName
+			</div>
+		</div>
+	}
+</div>
+<hr />
+<partial name="_PagingPartial" model="@Model" />

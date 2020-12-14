@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using GirlsHandmadeShop.Data;
     using GirlsHandmadeShop.Data.Models;
     using GirlsHandmadeShop.Services.Data;
@@ -73,6 +74,30 @@
 
             // TODO: Redirect to product info page
             return this.RedirectToAction("Create");
+        }
+
+        public IActionResult All(int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int ItemsPerPage = 12;
+            var viewModel = new ProductsListViewModel
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                ProductsCount = this.productsService.GetCount(),
+                Products = this.productsService.GetAll<ProductInListViewModel>(id, ItemsPerPage),
+            };
+            return this.View(viewModel);
+        }
+
+        public IActionResult ById(int id)
+        {
+            var recipe = this.productsService.GetById<SingleProductViewModel>(id);
+            return this.View(recipe);
         }
     }
 }
