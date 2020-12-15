@@ -9,5 +9,7 @@
     public class CreateProductInputModel : BaseProductInputModel
     {
         public IEnumerable<IFormFile> Images { get; set; }
+
+        public IEnumerable<ProductMaterialInputModel> Materials { get; set; }
     }
 }

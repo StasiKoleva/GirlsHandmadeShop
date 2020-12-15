@@ -10,6 +10,7 @@
     {
         public Product()
         {
+            this.Materials = new HashSet<ProductMaterial>();
             this.Images = new HashSet<Image>();
             this.Comments = new HashSet<Comment>();
             this.Votes = new HashSet<Vote>();
@@ -30,6 +31,8 @@
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
+
+        public virtual ICollection<ProductMaterial> Materials { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
 

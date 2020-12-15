@@ -244,6 +244,35 @@ namespace GirlsHandmadeShop.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Material", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Materials");
+                });
+
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -290,6 +319,28 @@ namespace GirlsHandmadeShop.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("GirlsHandmadeShop.Data.Models.ProductMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaterialId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductMaterials");
                 });
 
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Setting", b =>
@@ -494,6 +545,21 @@ namespace GirlsHandmadeShop.Data.Migrations
                     b.HasOne("GirlsHandmadeShop.Data.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GirlsHandmadeShop.Data.Models.ProductMaterial", b =>
+                {
+                    b.HasOne("GirlsHandmadeShop.Data.Models.Material", "Material")
+                        .WithMany("Products")
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GirlsHandmadeShop.Data.Models.Product", "Product")
+                        .WithMany("Materials")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

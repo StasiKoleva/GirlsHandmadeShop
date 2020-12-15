@@ -8,19 +8,360 @@
 	<div class="alert alert-success">@this.TempData["Message"]</div>
 }
 
-<h1>@this.ViewData["Title"]</h1>
-<hr />
-<div class="row">
-	@foreach (var product in this.Model.Products)
-	{
-		<div class="media col-md-4">
-			<img src="@product.ImageUrl" width="100" class="mr-3 img-responsive">
-			<div class="media-body">
-				<h5 class="mt-0"><a asp-action="ById" asp-route-id="@product.Id">@product.Name</a></h5>
-				@product.CategoryName
+@*<h1>@this.ViewData["Title"]</h1>*@
+
+<!--== Page Title Area Start ==-->
+<div id="page-title-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<div class="page-title-content">
+					<h1>Shop</h1>
+					<ul class="breadcrumb">
+						<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+						<li><a asp-area="" asp-controller="Products" asp-action="All" class="active">Shop</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
-	}
+	</div>
 </div>
-<hr />
-<partial name="_PagingPartial" model="@Model" />
+<!--== Page Title Area End ==-->
+<!--== Page Content Wrapper Start ==-->
+<div id="page-content-wrapper" class="p-9">
+	<div class="ruby-container">
+		<div class="row">
+			<!-- Sidebar Area Start -->
+			<div class="col-lg-3 mt-5 mt-lg-0">
+				<div id="sidebar-area-wrap">
+					<!-- Single Sidebar Item Start -->
+					<div class="single-sidebar-wrap">
+						<h2 class="sidebar-title">Shop By</h2>
+						<div class="sidebar-body">
+							<div class="shopping-option">
+								<h3>Shopping Options</h3>
+								<div class="shopping-option-item">
+									<h4>Color</h4>
+									<ul class="color-option-select d-flex">
+										<li class="color-item black">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">Black</span>
+											</div>
+										</li>
+
+										<li class="color-item green">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">green</span>
+											</div>
+										</li>
+
+										<li class="color-item red">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">red</span>
+											</div>
+										</li>
+
+										<li class="color-item yellow">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">yellow</span>
+											</div>
+										</li>
+
+										<li class="color-item orange">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">Orange</span>
+											</div>
+										</li>
+									</ul>
+								</div>
+
+								<div class="shopping-option-item">
+									<h4>MATERIALS</h4>
+									<ul class="sidebar-list">
+										<li><a href="#">Dolce (19)</a></li>
+										<li><a href="#">Gabbana (4)</a></li>
+										<li><a href="#">Nike (3)</a></li>
+										<li><a href="#">Nokia (5)</a></li>
+										<li><a href="#">Xiaomi (7)</a></li>
+										<li><a href="#">Other (33)</a></li>
+									</ul>
+								</div>
+
+								<div class="shopping-option-item">
+									<h4>Price</h4>
+									<ul class="sidebar-list">
+										<li><a href="#">$0.00 - $9.99 (2)</a></li>
+										<li><a href="#">$10.00 - $19.99 (3)</a></li>
+										<li><a href="#">$20.00 - $29.99 (5)</a></li>
+										<li><a href="#">$30.00 - $39.99 (2)</a></li>
+										<li><a href="#">$40.00 - $49.99 (10)</a></li>
+										<li><a href="#">$50.00 - $59.99 (12)</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Single Sidebar Item End -->
+					<!-- Single Sidebar Item Start -->
+					<div class="single-sidebar-wrap">
+						<h2 class="sidebar-title">My Wish List</h2>
+						<div class="sidebar-body">
+							<div class="small-product-list">
+								<div class="single-product-item">
+									<figure class="product-thumb">
+										<a href="#">
+											<img class="mr-2 img-fluid" src="~/assets/img/product-2.jpg"
+												 alt="Products" />
+										</a>
+									</figure>
+									<div class="product-details">
+										<h2><a href="#">Sprite Yoga Companion Kit</a></h2>
+										<span class="price">$6.00</span>
+										<a href="#" class="btn-add-to-cart">+ Add to Cart</a>
+									</div>
+								</div>
+
+								<div class="single-product-item">
+									<figure class="product-thumb">
+										<a href="#">
+											<img class="mr-2 img-fluid" src="~/assets/img/product-3.jpg"
+												 alt="Products" />
+										</a>
+									</figure>
+									<div class="product-details">
+										<h2><a href="#">Set of Sprite Yoga Straps</a></h2>
+										<span class="price">$88.00</span>
+										<a href="#" class="btn-add-to-cart">+ Add to Cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Single Sidebar Item End -->
+
+				</div>
+			</div>
+			<!-- Sidebar Area End -->
+			<!-- Shop Page Content Start -->
+			<div class="col-lg-9 order-first order-lg-last">
+				<div class="shop-page-content-wrap">
+					<div class="products-settings-option d-block d-md-flex">
+						<div class="product-cong-left d-flex align-items-center">
+							<ul class="product-view d-flex align-items-center">
+								<li class="current column-gird"><i class="fa fa-bars fa-rotate-90"></i></li>
+								<li class="box-gird"><i class="fa fa-th"></i></li>
+								<li class="list"><i class="fa fa-list-ul"></i></li>
+							</ul>
+							<span class="show-items">Items 1 - 12 of @Model.ProductsCount</span>
+						</div>
+
+						<div class="product-sort_by d-flex align-items-center mt-3 mt-md-0">
+							<label for="sort">Sort By:</label>
+							<select name="sort" id="sort">
+								<option value="Position">Relevance</option>
+								<option value="Name Ascen">Name, A to Z</option>
+								<option value="Name Decen">Name, Z to A</option>
+								<option value="Price Ascen">Price low to heigh</option>
+								<option value="Price Decen">Price heigh to low</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="shop-page-products-wrap">
+						<div class="products-wrapper">
+
+							<div class="row">
+								@foreach (var product in Model.Products)
+								{
+									<div class="col-lg-4 col-sm-6">
+										<!-- Single Product Item -->
+
+										<div class="single-product-item text-center">
+											<figure class="product-thumb">
+												<a asp-action="ById" asp-route-id="@product.Id">
+													<img src="@product.ImageUrl"
+														 alt="Products" class="img-fluid">
+												</a>
+											</figure>
+
+											<div class="product-details">
+												<h2><a asp-action="ById" asp-route-id="@product.Id">@product.Name</a></h2>
+												<div class="rating">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-half"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<span class="price">$@product.Price</span>
+												<p class="products-desc">
+													@product.Description
+												</p>
+												<a href="single-product.html" class="btn btn-add-to-cart">+ Add to Cart</a>
+												<a href="single-product.html" class="btn btn-add-to-cart btn-whislist">
+													+
+													Wishlist
+												</a>
+
+											</div>
+
+											<div class="product-meta">
+												<button type="button" data-toggle="modal" data-target="#quickView">
+													<span data-toggle="tooltip" data-placement="left" title="Quick View">
+														<i class="fa fa-compress"></i>
+													</span>
+												</button>
+												<a href="#" data-toggle="tooltip" data-placement="left"
+												   title="Add to Wishlist">
+													<i class="fa fa-heart-o"></i>
+												</a>
+											</div>
+											<span class="product-bedge">New</span>
+										</div>
+									</div>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="products-settings-option d-block d-md-flex justify-content-center">
+					<nav class="page-pagination">
+						<ul class="pagination">
+							<partial name="_PagingPartial" model="@Model" />
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<!-- Shop Page Content End -->
+
+
+	</div>
+</div>
+<!--== Page Content Wrapper End ==-->
+<!--== Product Quick View Modal Area Wrap ==-->
+<div class="modal fade" id="quickView" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true"><img src="~/assets/img/cancel.png" alt="Close" class="img-fluid" /></span>
+			</button>
+			<div class="modal-body">
+				<div class="quick-view-content single-product-page-content">
+					<div class="row">
+						<!-- Product Thumbnail Start -->
+						<div class="col-lg-5 col-md-6">
+							<div class="product-thumbnail-wrap">
+								<div class="product-thumb-carousel owl-carousel">
+									<div class="single-thumb-item">
+										<a href="single-product.html">
+											<img class="img-fluid"
+												 src="~/assets/img/single-pro-thumb.jpg"
+												 alt="Product" />
+										</a>
+									</div>
+
+									<div class="single-thumb-item">
+										<a href="single-product.html">
+											<img class="img-fluid"
+												 src="~/assets/img/single-pro-thumb-2.jpg"
+												 alt="Product" />
+										</a>
+									</div>
+
+									<div class="single-thumb-item">
+										<a href="single-product.html">
+											<img class="img-fluid"
+												 src="~/assets/img/single-pro-thumb-3.jpg"
+												 alt="Product" />
+										</a>
+									</div>
+
+									<div class="single-thumb-item">
+										<a href="single-product.html">
+											<img class="img-fluid"
+												 src="~/assets/img/single-pro-thumb-4.jpg"
+												 alt="Product" />
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Product Thumbnail End -->
+						<!-- Product Details Start -->
+						<div class="col-lg-7 col-md-6 mt-5 mt-md-0">
+							<div class="product-details">
+								<h2><a href="single-product.html">Crown Summit Backpack</a></h2>
+
+								<div class="rating">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+
+								<span class="price">$52.00</span>
+
+								<div class="product-info-stock-sku">
+									<span class="product-stock-status">In Stock</span>
+									<span class="product-sku-status ml-5"><strong>SKU</strong> MH03</span>
+								</div>
+
+								<p class="products-desc">
+									Ideal for cold-weathered training worked lorem ipsum outdoors,
+									the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out
+									the wind as ribbed cuffs and bottom band seal in body heat Lorem ipsum dolor sit
+									amet, consectetur adipisicing elit. Enim, reprehenderit.
+								</p>
+								<div class="shopping-option-item">
+									<h4>Color</h4>
+									<ul class="color-option-select d-flex">
+										<li class="color-item black">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">Black</span>
+											</div>
+										</li>
+
+										<li class="color-item green">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">green</span>
+											</div>
+										</li>
+
+										<li class="color-item orange">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">Orange</span>
+											</div>
+										</li>
+									</ul>
+								</div>
+
+								<div class="product-quantity d-flex align-items-center">
+									<div class="quantity-field">
+										<label for="qty">Qty</label>
+										<input type="number" id="qty" min="1" max="100" value="1" />
+									</div>
+
+									<a href="cart.html" class="btn btn-add-to-cart">Add to Cart</a>
+								</div>
+							</div>
+						</div>
+						<!-- Product Details End -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--== Product Quick View Modal Area End ==-->
+<!-- End All Modal Content -->

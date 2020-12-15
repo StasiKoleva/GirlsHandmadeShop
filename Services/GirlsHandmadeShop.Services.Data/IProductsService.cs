@@ -13,6 +13,8 @@
 
         IEnumerable<T> GetAll<T>(int page, int itemsPerPage = 12);
 
+        IEnumerable<T> GetByMaterials<T>(IEnumerable<int> materials);
+
         int GetCount();
 
         T GetById<T>(int id);

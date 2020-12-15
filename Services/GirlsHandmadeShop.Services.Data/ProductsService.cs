@@ -17,10 +17,12 @@
     {
         private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
         private readonly IDeletableEntityRepository<Product> productsRepository;
+        private readonly IDeletableEntityRepository<Material> materialsRepository;
 
-        public ProductsService(IDeletableEntityRepository<Product> productsRepository)
+        public ProductsService(IDeletableEntityRepository<Product> productsRepository, IDeletableEntityRepository<Material> materialsRepository)
         {
             this.productsRepository = productsRepository;
+            this.materialsRepository = materialsRepository;
         }
 
         public async Task CreateAsync(CreateProductInputModel input, string userId, string imagePath)
@@ -33,6 +35,20 @@
                 Price = input.Price,
                 AddedByUserId = userId,
             };
+
+            foreach (var inputIngredient in input.Materials)
+            {
+                var material = this.materialsRepository.All().FirstOrDefault(x => x.Name == inputIngredient.MaterialName);
+                if (material == null)
+                {
+                    material = new Material { Name = inputIngredient.MaterialName };
+                }
+
+                product.Materials.Add(new ProductMaterial
+                {
+                    Material = material,
+                });
+            }
 
             // /wwwroot/images/products/jhdsi-343g3h453-=g34g.jpg
             Directory.CreateDirectory($"{imagePath}/products/");
@@ -81,6 +97,17 @@
                 .To<T>().FirstOrDefault();
 
             return product;
+        }
+
+        public IEnumerable<T> GetByMaterials<T>(IEnumerable<int> materialIds)
+        {
+            var query = this.productsRepository.All().AsQueryable();
+            foreach (var materialId in materialIds)
+            {
+                query = query.Where(x => x.Materials.Any(i => i.MaterialId == materialId));
+            }
+
+            return query.To<T>().ToList();
         }
     }
 }

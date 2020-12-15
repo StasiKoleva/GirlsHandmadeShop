@@ -1,8 +1,10 @@
 ﻿namespace GirlsHandmadeShop.Web.ViewModels.Products
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using AutoMapper;
+    using GirlsHandmadeShop.Data.Common.Models;
     using GirlsHandmadeShop.Data.Models;
     using GirlsHandmadeShop.Services.Mapping;
 
@@ -14,9 +16,15 @@
 
         public string Name { get; set; }
 
+        public decimal Price { get; set; }
+
+        public string Description { get; set; }
+
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

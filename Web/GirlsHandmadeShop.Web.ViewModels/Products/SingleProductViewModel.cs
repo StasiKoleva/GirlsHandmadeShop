@@ -6,6 +6,7 @@
     using System.Text;
 
     using AutoMapper;
+    using GirlsHandmadeShop.Data.Common.Models;
     using GirlsHandmadeShop.Data.Models;
     using GirlsHandmadeShop.Services.Mapping;
 
@@ -14,6 +15,8 @@
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public decimal Price { get; set; }
 
         public string CategoryName { get; set; }
 
@@ -28,6 +31,8 @@
         public int CategoryProductsCount { get; set; }
 
         public double AverageVote { get; set; }
+
+        public IEnumerable<MaterialsViewModel> Materials { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

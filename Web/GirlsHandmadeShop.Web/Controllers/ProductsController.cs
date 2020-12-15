@@ -96,8 +96,8 @@
 
         public IActionResult ById(int id)
         {
-            var recipe = this.productsService.GetById<SingleProductViewModel>(id);
-            return this.View(recipe);
+            var product = this.productsService.GetById<SingleProductViewModel>(id);
+            return this.View(product);
         }
     }
 }

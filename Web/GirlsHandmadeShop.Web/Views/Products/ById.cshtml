@@ -4,168 +4,299 @@
 	this.ViewData["Title"] = Model.Name;
 }
 
-<div class="single-recipe-layout1">
-	<div class="ctg-name">@Model.CategoryName</div>
-	<h2 class="item-title">@this.ViewData["Title"]</h2>
-	<div class="row mb-4">
-		<div class="col-xl-9 col-12">
-			<ul class="entry-meta">
-				<li class="single-meta">
-					<i class="far fa-calendar-alt"></i>
-					@Model.CreatedOn.ToShortDateString()
-				</li>
-				<li class="single-meta">
-					<i class="fas fa-user"></i> by @Model.AddedByUserEmail
-				</li>
-				<li class="single-meta">
-					<ul class="item-rating">
-						<li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
-						<li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
-						<li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
-						<li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
-						<li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
-						<li><span id="averageVoteValue">@Model.AverageVote.ToString("0.0")</span><span> / 5</span> </li>
+<!--== Page Title Area Start ==-->
+<div id="page-title-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<div class="page-title-content">
+					<ul class="breadcrumb">
+						<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+						<li><a asp-area="" asp-controller="Products" asp-action="All">Shop</a></li>
+						<li><a href="single-product.html" class="active">@Model.Name</a></li>
 					</ul>
-				</li>
-				@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-				{
-					<li class="single-meta">
-						<a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
-					</li>
-					<li class="single-meta">
-						<form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
-						</form>
-						<button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-					</li>
-					<li class="single-meta">
-						<form method="post" asp-action="SendToEmail" asp-route-id="@Model.Id">
-							<button class="btn btn-warning">Send to my email</button>
-						</form>
-					</li>
-					<li class="single-meta">
-						<button class="btn btn-warning" onclick="window.print()">Print</button>
-					</li>
-				}
-			</ul>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="item-figure">
-		<img class="img-fluid w-100" src="@Model.ImageUrl" alt="@Model.Name" />
-	</div>
-	<div class="item-feature">
-		<ul>
-			<li>
-				<div class="feature-wrap">
-					<div class="media">
-						<div class="feature-icon">
-							<i class="far fa-clock"></i>
+</div>
+<!--== Page Title Area End ==-->
+<!--== Page Content Wrapper Start ==-->
+<div id="page-content-wrapper" class="p-9">
+	<div class="ruby-container">
+		<div class="row">
+			<!-- Single Product Page Content Start -->
+			<div class="col-lg-12">
+				<div class="single-product-page-content">
+					<div class="row">
+						<!-- Product Thumbnail Start -->
+						<div class="col-lg-5">
+
+							<div class="product-thumbnail-wrap">
+
+								<div class="product-thumb-carousel owl-carousel">
+
+									<div class="single-thumb-item">
+										<a>
+											<img class="img-fluid"
+												 src="@Model.ImageUrl"
+												 alt="Product" />
+										</a>
+									</div>
+								</div>
+							</div>
+
 						</div>
-						<div class="media-body space-sm">
-							<div class="feature-title">CREATED BY HAND FOR</div>
-							<div class="feature-sub-title">8-10 HOURS</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="feature-wrap">
-					<div class="media">
-						<div class="feature-icon">
-							<i class="fas fa-utensils"></i>
-						</div>
-						<div class="media-body space-sm">
-							<div class="feature-title">LOREM IPSUM</div>
-							<div class="feature-sub-title">LOREM IPSUM TEXT Mins</div>
-						</div>
-					</div>
-				</div>
-			</li>
-			<li>
-				<div class="feature-wrap">
-					<div class="media">
-						<div class="feature-icon">
-							<i class="fas fa-users"></i>
-						</div>
-						<div class="media-body space-sm">
-							<div class="feature-title">LOREM IPSUM</div>
-							<div class="feature-sub-title">								
+						<!-- Product Thumbnail End -->
+						<!-- Product Details Start -->
+						<div class="col-lg-7 mt-5 mt-lg-0 pl-5">
+							<div class="product-details">
+								<h2><a href="single-product.html">@Model.Name</a></h2>
+
+								<div class="rating">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half"></i>
+									<i class="fa fa-star-o"></i>
+								</div>
+
+								<span class="price">$@Model.Price</span>
+
+								<div class="product-info-stock-sku">
+									<span class="product-stock-status">In Stock</span>
+
+								</div>
+
+								<p class="products-desc">
+									@Model.Description
+								</p>
+
+								<div class="product-full-info-reviews">
+									<div class="form-group"> 
+										<h3 class="shopping-option-item">Materials</h3>
+
+										@foreach (var material in Model.Materials)
+										{
+											<ul>
+												<li><i class="far fa-dot-circle"></i> * @material.MaterialName</li>
+											</ul>
+											
+										}
+									</div>
+								</div>
+
+
+								<div class="shopping-option-item">
+									<h4>Color</h4>
+									<ul class="color-option-select d-flex">
+										<li class="color-item black">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">Black</span>
+											</div>
+										</li>
+
+										<li class="color-item green">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">green</span>
+											</div>
+										</li>
+
+										<li class="color-item orange">
+											<div class="color-hvr">
+												<span class="color-fill"></span>
+												<span class="color-name">Orange</span>
+											</div>
+										</li>
+									</ul>
+								</div>
+
+								<div class="product-quantity d-flex align-items-center">
+									<a href="single-product.html" target="_blank" class="btn btn-add-to-cart">
+										<i class="fa fa-shopping-cart"></i> Buy Now
+									</a>
+								</div>
 							</div>
 						</div>
+						<!-- Product Details End -->
 					</div>
-				</div>
-			</li>
-			<li>
-				<div class="feature-wrap">
-					<div class="media">
-						<div class="feature-icon">
-							<i class="fa fa-list-ol"></i>
-						</div>
-						<div class="media-body space-sm">
-							<div class="feature-title">CATEGORY PRODUCTS</div>
-							<div class="feature-sub-title">@Model.CategoryProductsCount</div>
-						</div>
-					</div>
-				</div>
-			</li>
-		</ul>
-	</div>
-	<div class="making-elements-wrap">
-		<div class="row">
-			<div class="col-md-6">
-				<p class="item-description">
-					@Model.Description
-				</p>
-			</div>
-			<div class="col-md-6">
-				<div class="ingridients-wrap">
-					<h3 class="item-title"><i class="fas fa-list-ul"></i>Materials</h3>
-					@*@foreach (var material in Model.Materials)
-					{
-						<div class="checkbox checkbox-primary">
-							<label for="checkbox1">@material.Quantity @material.MaterialName</label>
-						</div>
-					}*@
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<form method="post" id="antiForgeryForm"></form>
-@section Scripts {
-	<script>
-        $("li[data-vote]").each(function (el) {
-            $(this).click(function () {
-                var value = $(this).attr("data-vote");
-                var productId = @Model.Id;
-                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-				var data = { productId: productId, value: value };
-                $.ajax({
-                    type: "POST",
-                    url: "/api/Votes",
-                    data: JSON.stringify(data),
-                    headers: {
-                        'X-CSRF-TOKEN': antiForgeryToken
-                    },
-                    success: function (data) {
-                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
-                    },
-                    contentType: 'application/json',
-                });
-            })
-        });
-	</script>
-}
 
-<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body">
-				<p>Do you want to delete "@Model.Name"?</p>
+					<div class="row">
+						<div class="col-lg-12">
+							<!-- Product Full Description Start -->
+							<div class="product-full-info-reviews">
+								<!-- Single Product tab Menu -->
+								<nav class="nav" id="nav-tab">
+									
+									<a id="reviews-tab" data-toggle="tab" href="#reviews">Reviews</a>
+								</nav>
+								<!-- Single Product tab Menu -->
+								<!-- Single Product tab Content -->
+								<div class="tab-content" id="nav-tabContent">
+									
+
+									<div class="" id="reviews">
+										<div class="row">
+											<div class="col-lg-7">
+												<div class="product-ratting-wrap">
+													<div class="pro-avg-ratting">
+														<h4>4.5 <span>(Overall)</span></h4>
+														<span>Based on 9 Comments</span>
+													</div>
+													<div class="ratting-list">
+														<div class="sin-list float-left">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<span>(5)</span>
+														</div>
+														<div class="sin-list float-left">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<span>(3)</span>
+														</div>
+														<div class="sin-list float-left">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<span>(1)</span>
+														</div>
+														<div class="sin-list float-left">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<span>(0)</span>
+														</div>
+														<div class="sin-list float-left">
+															<i class="fa fa-star"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star-o"></i>
+															<span>(0)</span>
+														</div>
+													</div>
+													<div class="rattings-wrapper">
+
+														<div class="sin-rattings">
+															<div class="ratting-author">
+																<h3>Cristopher Lee</h3>
+																<div class="ratting-star">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<span>(5)</span>
+																</div>
+															</div>
+															<p>
+																enim ipsam voluptatem quia voluptas sit aspernatur aut
+																odit aut fugit, sed quia res eos qui ratione voluptatem
+																sequi Neque porro quisquam est, qui dolorem ipsum quia
+																dolor sit amet, consectetur, adipisci veli
+															</p>
+														</div>
+
+														<div class="sin-rattings">
+															<div class="ratting-author">
+																<h3>Nirob Khan</h3>
+																<div class="ratting-star">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<span>(5)</span>
+																</div>
+															</div>
+															<p>
+																enim ipsam voluptatem quia voluptas sit aspernatur aut
+																odit aut fugit, sed quia res eos qui ratione voluptatem
+																sequi Neque porro quisquam est, qui dolorem ipsum quia
+																dolor sit amet, consectetur, adipisci veli
+															</p>
+														</div>
+
+														<div class="sin-rattings">
+															<div class="ratting-author">
+																<h3>MD.ZENAUL ISLAM</h3>
+																<div class="ratting-star">
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<span>(5)</span>
+																</div>
+															</div>
+															<p>
+																enim ipsam voluptatem quia voluptas sit aspernatur aut
+																odit aut fugit, sed quia res eos qui ratione voluptatem
+																sequi Neque porro quisquam est, qui dolorem ipsum quia
+																dolor sit amet, consectetur, adipisci veli
+															</p>
+														</div>
+
+													</div>
+													<div class="ratting-form-wrapper fix">
+														<h3>Add your Comments</h3>
+														<form action="#" method="post">
+															<div class="ratting-form row">
+																<div class="col-12 mb-4">
+																	<h5>Rating:</h5>
+																	<div class="ratting-star fix">
+																		<i class="fa fa-star-o"></i>
+																		<i class="fa fa-star-o"></i>
+																		<i class="fa fa-star-o"></i>
+																		<i class="fa fa-star-o"></i>
+																		<i class="fa fa-star-o"></i>
+																	</div>
+																</div>
+																<div class="col-md-6 col-12 mb-4">
+																	<label for="name">Name:</label>
+																	<input id="name" placeholder="Name" type="text">
+																</div>
+																<div class="col-md-6 col-12 mb-4">
+																	<label for="email">Email:</label>
+																	<input id="email" placeholder="Email" type="text">
+																</div>
+																<div class="col-12 mb-4">
+																	<label for="your-review">Your Review:</label>
+																	<textarea name="review" id="your-review"
+																			  placeholder="Write a review"></textarea>
+																</div>
+																<div class="col-12">
+																	<input value="add review" type="submit">
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Single Product tab Content -->
+							</div>
+							<!-- Product Full Description End -->
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" onclick="deleteForm.submit()">Yes</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-			</div>
+			<!-- Single Product Page Content End -->
 		</div>
 	</div>
 </div>
+<!--== Page Content Wrapper End ==-->

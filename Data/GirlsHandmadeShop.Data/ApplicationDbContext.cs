@@ -34,6 +34,10 @@
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Material> Materials { get; set; }
+
+        public DbSet<ProductMaterial> ProductMaterials { get; set; }
+
         public DbSet<Vote> Votes { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

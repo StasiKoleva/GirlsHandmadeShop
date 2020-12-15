@@ -1,76 +1,325 @@
 ﻿@using GirlsHandmadeShop.Common
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="zxx">
+
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="meta description">
+
 	<title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
-	<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
-	<link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
-	<link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
-	<link href="~/lib/datatables/media/css/jquery.dataTables.min.css" asp-append-version="true" rel="stylesheet" />
-	<link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+
+	<!--=== Favicon ===-->
+	<link rel="shortcut icon" href="~/assets/img/favicon.ico" type="image/x-icon" />
+
+	<!--== Google Fonts ==-->
+	<link rel="stylesheet" type="text/css"
+		  href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+	<link rel="stylesheet" type="text/css"
+		  href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" />
+
+	<!--=== Bootstrap CSS ===-->
+	<link href="~/assets/css/vendor/bootstrap.min.css" rel="stylesheet">
+	<!--=== Font-Awesome CSS ===-->
+	<link href="~/assets/css/vendor/font-awesome.css" rel="stylesheet">
+	<!--=== Plug~/ins CSS ===-->
+	<link href="~/assets/css/plugins.css" rel="stylesheet">
+	<!--=== Main Style CSS ===-->
+	<link href="~/assets/css/style.css" rel="stylesheet">
+
+	<!-- Modernizer JS -->
+	<script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
+	<!--[if lt IE 9]>
+	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 </head>
 <body>
 
-	<div id="wrapper" class="wrapper">
-		<header>
-			<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-				<div class="container">
-					<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-						<partial name="_LoginPartial" />
-						<ul class="navbar-nav flex-grow-1">
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="All">All Products</a>
-							</li>
-							@*<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="SearchProducts" asp-action="Index">Search</a>
-							</li>*@
-							@if (this.User.Identity.IsAuthenticated)
-							{
-								<li class="nav-item">
-									<a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Create">Create Products</a>
+	<!--== Header Area Start ==-->
+	<header id="header-area">
+		<div class="ruby-container">
+			<div class="row">
+				<!-- Logo Area Start -->
+				<div class="col-3 col-lg-1 col-xl-2 m-auto">
+					<a asp-area="" asp-controller="Home" asp-action="Index" class="logo-area">
+						<img src="~/assets/img/logo.png" alt="Logo" class="img-fluid" />
+					</a>
+				</div>
+				<!-- Logo Area End -->
+				<!-- Navigation Area Start -->
+				<div class="col-3 col-lg-9 col-xl-8 m-auto">
+					<div class="main-menu-wrap">
+						<nav id="mainmenu">
+							<ul>
+								<li class="dropdown-show">
+									<a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 								</li>
-							}
-							@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-							{
-								<li class="nav-item">
-									<a class="nav-link text-dark" asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Admin</a>
+								<li class="dropdown-show">
+									<a asp-area="" asp-controller="Products" asp-action="All">Shop</a>
+
+									<ul class="mega-menu-wrap dropdown-nav">
+										<li class="mega-menu-item">
+											<a href="shop.html" class="mega-item-title">
+												Categories
+											</a>
+											<ul>
+												<li><a href="shop.html">Necklaces</a></li>
+												<li><a href="shop-right-sidebar.html">Bracelets</a></li>
+												<li><a href="shop-left-full-wide.html">Earrings</a></li>
+												<li><a href="shop-right-full-wide.html">Accessories</a></li>
+											</ul>
+										</li>
+									</ul>
 								</li>
-							}
+								<li class="dropdown-show">
+									<a href="#">Events</a>
+									<ul class="dropdown-nav">
+										<li><a href="">LOREM IPSSUM</a></li>
+										<li><a href="">LOREM IPSSUM</a></li>
+									</ul>
+								</li>
+								<li class="dropdown-show">
+									<a href="#">Blog</a>
+									<ul class="dropdown-nav">
+										<li><a href="">LOREM IPSSUM</a></li>
+										<li><a href="">LOREM IPSSUM</a></li>
+									</ul>
+								</li>
+								<li class="dropdown-show">
+									<a href="#">Gallery</a>
+								</li>
+								<li><a href="contact.html">About Us</a></li>
+								<li><a href="contact.html">Contact Us</a></li>
+
+								@if (this.User.Identity.IsAuthenticated)
+								{
+									<li class="dropdown-show">
+										<a asp-area="" asp-controller="Products" asp-action="Create">Add new product</a>
+									</li>
+								}
+								@*@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+								{
+									<li class="dropdown-show">
+										<a asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Admin</a>
+									</li>
+								}*@
+
+
+								<partial name="_LoginPartial" />
+
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<!-- Navigation Area End -->
+				<!-- Header Right Meta Start -->
+				<div class="col-6 col-lg-2 m-auto">
+					<div class="header-right-meta text-right">
+						<ul>
+							<li><a href="#" class="modal-active"><i class="fa fa-search"></i></a></li>
+							<li class="settings">
+								<a href="#"><i class="fa fa-cog"></i></a>
+								<div class="site-settings d-block d-sm-flex">
+									<dl class="currency">
+										<dt>Currency</dt>
+										<dd class="current"><a href="#">EUR</a></dd>
+										<dd><a href="#">EUR</a></dd>
+										<dd><a href="#">BGN</a></dd>
+									</dl>
+
+									<dl class="my-account">
+										<dt>My Account</dt>
+										<dd><a href="#">Dashboard</a></dd>
+										<dd><a href="#">Profile</a></dd>
+										<dd><a href="#">Sign</a></dd>
+									</dl>
+
+									<dl class="language">
+										<dt>Language</dt>
+										<dd class="current"><a href="#">English</a></dd>
+										<dd><a href="#">English</a></dd>
+										<dd><a href="#">Bulgarian</a></dd>									
+									</dl>
+								</div>
+							</li>
+							<li class="shop-cart">
+								<a href="#">
+									<i class="fa fa-shopping-bag"></i> <span class="count">1</span>
+								</a>
+								<div class="mini-cart">
+									<div class="mini-cart-body">
+										<div class="single-cart-item d-flex">
+											<figure class="product-thumb">
+												<a href="#">
+													<img class="img-fluid" src="~/assets/img/product-1.jpg"
+														 alt="Products" />
+												</a>
+											</figure>
+
+											<div class="product-details">
+												<h2><a href="#">Sprite Yoga Companion</a></h2>
+												<div class="cal d-flex align-items-center">
+													<span class="quantity">3</span>
+													<span class="multiplication">X</span>
+													<span class="price">$77.00</span>
+												</div>
+											</div>
+											<a href="#" class="remove-icon"><i class="fa fa-trash-o"></i></a>
+										</div>
+										<div class="mini-cart-footer">
+											<a href="checkout.html" class="btn-add-to-cart">Checkout</a>
+										</div>
+									</div>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div>
-			</nav>
-		</header>
-
-		<div class="container">
-			<partial name="_CookieConsentPartial" />
-			<main role="main" class="pb-3">
-				@this.RenderBody()
-			</main>
-		</div>
-
-		<footer class="ranna-bg-dark">
-			<div class="container">
-				&copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+				<!-- Header Right Meta End -->
 			</div>
-		</footer>
-	</div>
-	<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-	<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-	<script src="~/js/site.min.js" asp-append-version="true"></script>
-	<script src="~/lib/datatables/media/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+		</div>
+	</header>
+	<!--== Header Area End ==-->
+
+	@this.RenderBody()
+
+	<!-- Footer Area Start -->
+	<footer id="footer-area">
+		<!-- Footer Call to Action Start -->
+		<div class="footer-callto-action">
+			<div class="ruby-container">
+				<div class="callto-action-wrapper">
+					<div class="row">
+						<div class="col-lg-3 col-md-6">
+							<!-- Single Call-to Action Start -->
+							<div class="single-callto-action d-flex">
+								<figure class="callto-thumb">
+									<img src="~/assets/img/air-plane.png" alt="WorldWide Shipping" />
+								</figure>
+								<div class="callto-info">
+									<h2>Free Shipping Worldwide</h2>
+									<p>On order over $150 - 7 days a week</p>
+								</div>
+							</div>
+							<!-- Single Call-to Action End -->
+						</div>
+
+						<div class="col-lg-3 col-md-6">
+							<!-- Single Call-to Action Start -->
+							<div class="single-callto-action d-flex">
+								<figure class="callto-thumb">
+									<img src="~/assets/img/support.png" alt="Support" />
+								</figure>
+								<div class="callto-info">
+									<h2>24/7 CUSTOMER SERVICE</h2>
+									<p>Call us 24/7 at 000 - 123 - 456k</p>
+								</div>
+							</div>
+							<!-- Single Call-to Action End -->
+						</div>
+
+						<div class="col-lg-3 col-md-6">
+							<!-- Single Call-to Action Start -->
+							<div class="single-callto-action d-flex">
+								<figure class="callto-thumb">
+									<img src="~/assets/img/money-back.png" alt="Money Back" />
+								</figure>
+								<div class="callto-info">
+									<h2>MONEY BACK Guarantee!</h2>
+									<p>Send within 30 days</p>
+								</div>
+							</div>
+							<!-- Single Call-to Action End -->
+						</div>
+
+						<div class="col-lg-3 col-md-6">
+							<!-- Single Call-to Action Start -->
+							<div class="single-callto-action d-flex">
+								<figure class="callto-thumb">
+									<img src="~/assets/img/cog.png" alt="Guide" />
+								</figure>
+								<div class="callto-info">
+									<h2>SHOPPING GUIDE</h2>
+									<p>Chat with us if you need guidance!</p>
+								</div>
+							</div>
+							<!-- Single Call-to Action End -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Call to Action End -->
+		<!-- Footer Follow Up Area Start -->
+		<div class="footer-followup-area">
+			<div class="ruby-container">
+				<div class="followup-wrapper">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="follow-content-wrap">
+								<a asp-area="" asp-controller="Home" asp-action="Index" class="logo"><img src="~/assets/img/logo.png" alt="logo" /></a>
+								<p>Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum</p>
+
+								<div class="footer-social-icons">
+									<a href="https://www.facebook.com/girls.handmade.shop"><i class="fa fa-facebook"></i></a>
+									@*<a href="#"><i class="fa fa-twitter"></i></a>*@
+									@*<a href="#"><i class="fa fa-pinterest"></i></a>*@
+									<a href="https://www.instagram.com/girls.handmade.shop/"><i class="fa fa-instagram"></i></a>
+									@*<a href="#"><i class="fa fa-flickr"></i></a>*@
+								</div>
+
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Follow Up Area End -->
+		
+		
+		<!-- Copyright Area Start -->
+		@*<div class="copyright-area">
+			<div class="ruby-container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="copyright-text">
+							<p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>*@
+		<!-- Copyright Area End -->
+
+	</footer>
+	<!-- Footer Area End -->
+	<!-- Start All Modal Content -->
+	
+	<!-- Scroll to Top Start -->
+	<a href="#" class="scrolltotop"><i class="fa fa-angle-up"></i></a>
+	<!-- Scroll to Top End -->
+	<!--=======================Javascript============================-->
+	<!--=== Jquery Min Js ===-->
+	<script src="~/assets/js/vendor/jquery-3.3.1.min.js"></script>
+	<!--=== Jquery Migrate Min Js ===-->
+	<script src="~/assets/js/vendor/jquery-migrate-1.4.1.min.js"></script>
+	<!--=== Popper Min Js ===-->
+	<script src="~/assets/js/vendor/popper.min.js"></script>
+	<!--=== Bootstrap Min Js ===-->
+	<script src="~/assets/js/vendor/bootstrap.min.js"></script>
+	<!--=== Plugins Min Js ===-->
+	<script src="~/assets/js/plugins.js"></script>
+
+	<!--=== Active Js ===-->
+	<script src="~/assets/js/active.js"></script>
+
 	@await this.RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
