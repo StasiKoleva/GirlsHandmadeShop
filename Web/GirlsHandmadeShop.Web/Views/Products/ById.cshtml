@@ -51,7 +51,7 @@
 						<!-- Product Details Start -->
 						<div class="col-lg-7 mt-5 mt-lg-0 pl-5">
 							<div class="product-details">
-								<h2><a href="single-product.html">@Model.Name</a></h2>
+								<h2><a>@Model.Name</a></h2>
 
 								<div class="rating">
 									<i class="fa fa-star"></i>
@@ -64,8 +64,8 @@
 								<span class="price">$@Model.Price</span>
 
 								<div class="product-info-stock-sku">
-									<span class="product-stock-status">In Stock</span>
-
+									@*<span class="product-stock-status">@Model.Availability</span>*@
+									@Model.Availability
 								</div>
 
 								<p class="products-desc">
@@ -73,7 +73,7 @@
 								</p>
 
 								<div class="product-full-info-reviews">
-									<div class="form-group"> 
+									<div class="form-group">
 										<h3 class="shopping-option-item">Materials</h3>
 
 										@foreach (var material in Model.Materials)
@@ -81,7 +81,7 @@
 											<ul>
 												<li><i class="far fa-dot-circle"></i> * @material.MaterialName</li>
 											</ul>
-											
+
 										}
 									</div>
 								</div>
@@ -129,13 +129,13 @@
 							<div class="product-full-info-reviews">
 								<!-- Single Product tab Menu -->
 								<nav class="nav" id="nav-tab">
-									
+
 									<a id="reviews-tab" data-toggle="tab" href="#reviews">Reviews</a>
 								</nav>
 								<!-- Single Product tab Menu -->
 								<!-- Single Product tab Content -->
 								<div class="tab-content" id="nav-tabContent">
-									
+
 
 									<div class="" id="reviews">
 										<div class="row">

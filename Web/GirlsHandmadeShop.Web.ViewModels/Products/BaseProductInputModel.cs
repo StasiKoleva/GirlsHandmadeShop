@@ -18,6 +18,9 @@
         [Required]
         public decimal Price { get; set; }
 
+        [Required]
+        public string Availability { get; set; }
+
         public int CategoryId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }

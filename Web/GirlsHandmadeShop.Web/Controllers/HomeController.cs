@@ -12,10 +12,12 @@
     public class HomeController : BaseController
     {
         private readonly IGetCountsService countsService;
+        private readonly IProductsService productsService;
 
-        public HomeController(IGetCountsService countsService)
+        public HomeController(IGetCountsService countsService, IProductsService productsService)
         {
             this.countsService = countsService;
+            this.productsService = productsService;
         }
 
         public IActionResult Index()
@@ -27,6 +29,7 @@
                 ProductsCount = countsDto.ProductsCount,
                 CategoriesCount = countsDto.CategoriesCount,
                 ImagesCount = countsDto.ImagesCount,
+                RandomProducts = this.productsService.GetRandom<IndexPageProductViewModel>(4),
             };
             return this.View(viewModel);
         }

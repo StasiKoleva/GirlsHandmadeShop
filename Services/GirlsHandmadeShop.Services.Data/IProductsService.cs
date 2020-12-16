@@ -18,5 +18,7 @@
         int GetCount();
 
         T GetById<T>(int id);
+
+        IEnumerable<T> GetRandom<T>(int count);
     }
 }

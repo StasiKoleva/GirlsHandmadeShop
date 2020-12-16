@@ -11,5 +11,7 @@
         public int CategoriesCount { get; set; }
 
         public int ImagesCount { get; set; }
+
+        public IEnumerable<IndexPageProductViewModel> RandomProducts { get; set; }
     }
 }

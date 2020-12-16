@@ -33,6 +33,7 @@
                 Description = input.Description,
                 Name = input.Name,
                 Price = input.Price,
+                Availability = input.Availability,
                 AddedByUserId = userId,
             };
 
@@ -108,6 +109,14 @@
             }
 
             return query.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetRandom<T>(int count)
+        {
+            return this.productsRepository.All()
+                .OrderBy(x => Guid.NewGuid())
+                .Take(count)
+                .To<T>().ToList();
         }
     }
 }

@@ -28,6 +28,8 @@
 
         public string Description { get; set; }
 
+        public string Availability { get; set; }
+
         public int CategoryProductsCount { get; set; }
 
         public double AverageVote { get; set; }
