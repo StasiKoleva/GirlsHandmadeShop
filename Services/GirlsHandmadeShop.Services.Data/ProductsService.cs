@@ -118,5 +118,16 @@
                 .Take(count)
                 .To<T>().ToList();
         }
+
+        public async Task UpdateAsync(int id, EditProductInputModel input)
+        {
+            var products = this.productsRepository.All().FirstOrDefault(x => x.Id == id);
+            products.Name = input.Name;
+            products.Description = input.Description;
+            products.Price = input.Price;
+            products.Availability = input.Availability;
+            products.CategoryId = input.CategoryId;
+            await this.productsRepository.SaveChangesAsync();
+        }
     }
 }

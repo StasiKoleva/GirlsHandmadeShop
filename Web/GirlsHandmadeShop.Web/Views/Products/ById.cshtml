@@ -48,10 +48,36 @@
 
 						</div>
 						<!-- Product Thumbnail End -->
+
 						<!-- Product Details Start -->
 						<div class="col-lg-7 mt-5 mt-lg-0 pl-5">
 							<div class="product-details">
 								<h2><a>@Model.Name</a></h2>
+
+								@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+								{
+									<div class="product-quantity d-flex align-items-center">
+										<ul class="list-unstyled">
+
+											<li class="d-inline">
+												<a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-add-to-cart">Edit</a>
+											</li>
+											<li class="d-inline">
+												<form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
+												</form>
+												<button class="btn btn-add-to-cart" data-toggle="modal" data-target="#deleteModal">Delete</button>
+											</li>
+											<li class="d-inline">
+												<form method="post" asp-action="SendToEmail" asp-route-id="@Model.Id">
+													<button class="btn btn-add-to-cart">Send to my email</button>
+												</form>
+											</li>
+											<li class="d-inline">
+												<button class="btn btn-add-to-cart" onclick="window.print()">Print</button>
+											</li>
+										</ul>
+									</div>
+								}
 
 								<div class="rating">
 									<i class="fa fa-star"></i>
@@ -118,6 +144,9 @@
 										<i class="fa fa-shopping-cart"></i> Buy Now
 									</a>
 								</div>
+
+
+
 							</div>
 						</div>
 						<!-- Product Details End -->

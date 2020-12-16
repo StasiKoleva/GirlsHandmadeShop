@@ -1,0 +1,99 @@
+﻿@model GirlsHandmadeShop.Web.ViewModels.Products.EditProductInputModel
+@{
+	ViewData["Title"] = "Edit product";
+	var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+<div id="page-content-wrapper" class="p-9">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-7 m-auto">
+				<div class="login-register-wrapper">
+					<nav class="nav login-reg-tab-menu">
+						<h1 class="align-content-center">@ViewData["Title"]</h1>
+					</nav>
+					
+
+					<form method="post" id="editForm">
+						<div class="form-group">
+							<label asp-for="Name"></label>
+							<input asp-for="Name" class="form-control" />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="Description"></label>
+							<textarea asp-for="Description" class="form-control"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="Price"></label>
+							<input asp-for="Price" class="form-control" />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="Availability"></label>
+							<input asp-for="Availability" class="form-control" />
+							<span asp-validation-for="Availability" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="CategoryId"></label>
+							<select asp-for="CategoryId" asp-items="categoryItems" class="form-control"></select>
+							<span asp-validation-for="CategoryId" class="text-danger"></span>
+						</div>
+						<hr />
+						<input type="hidden" asp-for="Id" />
+					</form>
+
+					<button type="submit" class="btn-login" data-toggle="modal" data-target="#modalEdit">Save changes</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+					@*<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+						<hr />
+						<div asp-validation-summary="All" class="text-danger"></div>
+						<div class="form-group">
+							<label asp-for="Input.Email"></label>
+							<input asp-for="Input.Email" class="form-control" />
+							<span asp-validation-for="Input.Email" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="Input.Password"></label>
+							<input asp-for="Input.Password" class="form-control" />
+							<span asp-validation-for="Input.Password" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="Input.ConfirmPassword"></label>
+							<input asp-for="Input.ConfirmPassword" class="form-control" />
+							<span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+						</div>
+						<button type="submit" class="btn-login">Register</button>
+					</form>*@
+				
+<!-- Modal -->
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Confirm edit</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>
+					Do you confirm this changes?
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
