@@ -129,5 +129,13 @@
             products.CategoryId = input.CategoryId;
             await this.productsRepository.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var recipe = this.productsRepository.All().FirstOrDefault(x => x.Id == id);
+            this.productsRepository.Delete(recipe);
+            await this.productsRepository.SaveChangesAsync();
+        }
+
     }
 }

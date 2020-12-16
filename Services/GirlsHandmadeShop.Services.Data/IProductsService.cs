@@ -22,5 +22,7 @@
         IEnumerable<T> GetRandom<T>(int count);
 
         Task UpdateAsync(int id, EditProductInputModel input);
+
+        Task DeleteAsync(int id);
     }
 }
