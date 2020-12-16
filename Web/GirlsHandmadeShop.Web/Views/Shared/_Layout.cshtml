@@ -64,14 +64,14 @@
 
 									<ul class="mega-menu-wrap dropdown-nav">
 										<li class="mega-menu-item">
-											<a href="shop.html" class="mega-item-title">
+											<a  class="mega-item-title">
 												Categories
 											</a>
 											<ul>
-												<li><a href="shop.html">Necklaces</a></li>
-												<li><a href="shop-right-sidebar.html">Bracelets</a></li>
-												<li><a href="shop-left-full-wide.html">Earrings</a></li>
-												<li><a href="shop-right-full-wide.html">Accessories</a></li>
+												<li><a a asp-controller="Products" asp-action="Sort" asp-route-sorting="6">Necklaces</a></li>
+												<li><a a asp-controller="Products" asp-action="Sort" asp-route-sorting="7">Bracelets</a></li>
+												<li><a a asp-controller="Products" asp-action="Sort" asp-route-sorting="8">Earrings</a></li>
+												<li><a a asp-controller="Products" asp-action="Sort" asp-route-sorting="9">Accessories</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -103,11 +103,11 @@
 									</li>
 								}
 								@*@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-								{
-									<li class="dropdown-show">
-										<a asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Admin</a>
-									</li>
-								}*@
+									{
+										<li class="dropdown-show">
+											<a asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Admin</a>
+										</li>
+									}*@
 
 
 								<partial name="_LoginPartial" />
@@ -125,12 +125,12 @@
 							<li class="settings">
 								<a href="#"><i class="fa fa-cog"></i></a>
 								<div class="site-settings d-block d-sm-flex">
-									<dl class="currency">
-										<dt>Currency</dt>
-										<dd class="current"><a href="#">EUR</a></dd>
-										<dd><a href="#">EUR</a></dd>
-										<dd><a href="#">BGN</a></dd>
-									</dl>
+									@*<dl class="currency">
+											<dt>Currency</dt>
+											<dd class="current"><a href="#">EUR</a></dd>
+											<dd><a href="#">EUR</a></dd>
+											<dd><a href="#">BGN</a></dd>
+										</dl>*@
 
 									<dl class="my-account">
 										<dt>My Account</dt>
@@ -139,12 +139,12 @@
 										<dd><a href="#">Sign</a></dd>
 									</dl>
 
-									<dl class="language">
-										<dt>Language</dt>
-										<dd class="current"><a href="#">English</a></dd>
-										<dd><a href="#">English</a></dd>
-										<dd><a href="#">Bulgarian</a></dd>									
-									</dl>
+									@*<dl class="language">
+											<dt>Language</dt>
+											<dd class="current"><a href="#">English</a></dd>
+											<dd><a href="#">English</a></dd>
+											<dd><a href="#">Bulgarian</a></dd>
+										</dl>*@
 								</div>
 							</li>
 							<li class="shop-cart">
@@ -273,7 +273,7 @@
 									@*<a href="#"><i class="fa fa-flickr"></i></a>*@
 								</div>
 
-								
+
 							</div>
 						</div>
 					</div>
@@ -281,27 +281,24 @@
 			</div>
 		</div>
 		<!-- Footer Follow Up Area End -->
-		
-		
 		<!-- Copyright Area Start -->
 		@*<div class="copyright-area">
-			<div class="ruby-container">
-				<div class="row">
-					<div class="col-lg-12 text-center">
-						<div class="copyright-text">
-							<p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p>
+				<div class="ruby-container">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<div class="copyright-text">
+								<p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>*@
+			</div>*@
 		<!-- Copyright Area End -->
 
 	</footer>
 	<!-- Footer Area End -->
-	<!-- Start All 
+	<!-- Start All
 		Content -->
-	
 	<!-- Scroll to Top Start -->
 	<a href="#" class="scrolltotop"><i class="fa fa-angle-up"></i></a>
 	<!-- Scroll to Top End -->

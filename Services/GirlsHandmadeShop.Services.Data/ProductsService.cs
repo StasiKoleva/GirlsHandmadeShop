@@ -161,10 +161,26 @@
         private IEnumerable<ProductInListViewModel> SortProducts(IEnumerable<ProductInListViewModel> result, int sorting) =>
            sorting switch
            {
+
+               // 1 -> A-Z default
+               // 2 -> A-Z
+               // 3 -> Z-A
+               // 4 ->Price low to high
+               // 5 ->Price high to low
+               // 6 -> Necklaces
+               // 7 -> Bracelets
+               // 8 -> Earrings
+               // 9 -> Accesories
+
                1 => result.OrderBy(x => x.Name).ToList(),
                2 => result.OrderBy(x => x.Name).ToList(),
                3 => result.OrderByDescending(x => x.Price).ToList(),
                4 => result.OrderBy(x => x.Price).ToList(),
+               5 => result.OrderBy(x => x.Price).ToList(),
+               6 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Necklaces").ToList(),
+               7 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Bracelets").ToList(),
+               8 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Earrings").ToList(),
+               9 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Accessories").ToList(),
                _ => result.OrderByDescending(x => x.Name).ToList(),
            };
     }
