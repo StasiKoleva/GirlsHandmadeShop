@@ -27,7 +27,6 @@
 	</div>
 </div>
 <!--== Page Title Area End ==-->
-
 <!--== Page Content Wrapper Start ==-->
 <div id="page-content-wrapper" class="p-9">
 	<div class="ruby-container">
@@ -143,7 +142,6 @@
 					</div>
 
 					<!-- Single Sidebar Item End -->
-
 					<!-- Single Sidebar Item Start -->
 
 					<div class="single-sidebar-wrap">
@@ -185,7 +183,6 @@
 				</div>
 			</div>
 			<!-- Sidebar Area End -->
-
 			<!-- Shop Page Content Start -->
 			<div class="col-lg-9 order-first order-lg-last">
 				<div class="shop-page-content-wrap">
@@ -209,12 +206,48 @@
 									<option value="Price Decen">Price high to low</option>
 								</select>
 							</div>*@
+						<style>
+							.dropbtn {
+								background-color: #d82e2e;
+								color: white;
+								padding: 16px;
+								font-size: 16px;
+								border: none;
+								cursor: pointer;
+							}
 
+							.dropdown-content {
+								display: none;
+								position: absolute;
+								background-color: #f9f9f9;
+								min-width: 160px;
+								box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+								z-index: 1;
+							}
 
-						<div class="product-sort_by d-flex align-items-center mt-3 mt-md-0">
-							<label for="sort">Sort By:</label>
-							<ul name="sort" id="sort">
+								.dropdown-content a {
+									color: black;
+									padding: 12px 16px;
+									text-decoration: none;
+									display: block;
+								}
 
+									.dropdown-content a:hover {
+										background-color: #f1f1f1
+									}
+
+							.dropdown:hover .dropdown-content {
+								display: block;
+							}
+
+							.dropdown:hover .dropbtn {
+								background-color: #3e8e4;
+							}
+						</style>
+
+						<div class="dropdown">
+							<button class="dropbtn">Sort By</button>
+							<div class="dropdown-content">
 
 								<li class="dropdown-item">
 									<a asp-controller="Products" asp-action="Sort" asp-route-sorting="1">Relevance</a>
@@ -236,10 +269,39 @@
 									<a asp-controller="Products" asp-action="Sort" asp-route-sorting="5">Price high to low</a>
 								</li>
 
-
-
-							</ul>
+							</div>
 						</div>
+
+
+						@*<div class="product-sort_by d-flex align-items-center mt-3 mt-md-0 mega-menu-wrap dropdown-nav">
+								<label for="sort">Sort By:</label>
+								<ul name="sort" id="sort" class="mega-menu-wrap dropdown-nav">
+
+
+									<li class="dropdown-item">
+										<a asp-controller="Products" asp-action="Sort" asp-route-sorting="1">Relevance</a>
+									</li>
+
+									<li class="dropdown-item" value="Name Ascen">
+										<a asp-controller="Products" asp-action="Sort" asp-route-sorting="2">Name, A to Z</a>
+									</li>
+
+									<li class="dropdown-item" value="Name Decen">
+										<a asp-controller="Products" asp-action="Sort" asp-route-sorting="3">Name, Z to A</a>
+									</li>
+
+									<li class="dropdown-item" value="Price Ascen">
+										<a asp-controller="Products" asp-action="Sort" asp-route-sorting="4">Price low to high</a>
+									</li>
+
+									<li class="dropdown-item" value="Price Decen">
+										<a asp-controller="Products" asp-action="Sort" asp-route-sorting="5">Price high to low</a>
+									</li>
+
+
+
+								</ul>
+							</div>*@
 					</div>
 
 					<div class="shop-page-products-wrap">
@@ -281,11 +343,11 @@
 											</div>
 
 											<div class="product-meta">
-												<button type="button" data-toggle="modal" data-target="#quickView">
+												@*<button type="button" data-toggle="modal" data-target="#quickView">
 													<span data-toggle="tooltip" data-placement="left" title="Quick View">
 														<i class="fa fa-compress"></i>
 													</span>
-												</button>
+												</button>*@
 												<a href="#" data-toggle="tooltip" data-placement="left"
 												   title="Add to Wishlist">
 													<i class="fa fa-heart-o"></i>
@@ -316,8 +378,9 @@
 </div>
 <!--== Page Content Wrapper End ==-->
 
+
 <!--== Product Quick View Modal Area Wrap ==-->
-<div class="modal fade" id="quickView" tabindex="-1" role="dialog">
+<!--<div class="modal fade" id="quickView" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -325,9 +388,9 @@
 			</button>
 			<div class="modal-body">
 				<div class="quick-view-content single-product-page-content">
-					<div class="row">
+					<div class="row">-->
 						<!-- Product Thumbnail Start -->
-						<div class="col-lg-5 col-md-6">
+						<!--<div class="col-lg-5 col-md-6">
 							<div class="product-thumbnail-wrap">
 								<div class="product-thumb-carousel owl-carousel">
 									<div class="single-thumb-item">
@@ -363,10 +426,10 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<!-- Product Thumbnail End -->
 						<!-- Product Details Start -->
-						<div class="col-lg-7 col-md-6 mt-5 mt-md-0">
+						<!--<div class="col-lg-7 col-md-6 mt-5 mt-md-0">
 							<div class="product-details">
 								<h2><a href="single-product.html">Crown Summit Backpack</a></h2>
 
@@ -426,13 +489,13 @@
 									<a href="cart.html" class="btn btn-add-to-cart">Add to Cart</a>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<!-- Product Details End -->
-					</div>
+					<!--</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</div>-->
 <!--== Product Quick View Modal Area End ==-->
 <!-- End All Modal Content -->
