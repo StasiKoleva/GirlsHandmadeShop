@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using GirlsHandmadeShop.Data.Common.Models;
@@ -23,6 +22,28 @@
         {
             this.productsRepository = productsRepository;
             this.materialsRepository = materialsRepository;
+        }
+
+        public IEnumerable<ProductInListViewModel> Sort<TProductsInListViewModel>(int sorting)
+        {
+            var products = this.productsRepository.AllAsNoTracking().ToList();
+            var result = new List<ProductInListViewModel>();
+
+            foreach (var item in products)
+            {
+                var imageUrl = this.productsRepository.AllAsNoTracking()
+                    .Where(x => x.Id == item.Id).OrderBy(x => x.Name)
+                    .Select(x => x.Images)
+                    .FirstOrDefault();
+
+                var product = this.productsRepository.AllAsNoTracking()
+                 .Where(x => x.Id == item.Id)
+                 .To<ProductInListViewModel>().FirstOrDefault();
+
+                result.Add(product);
+            }
+
+            return this.SortProducts(result, sorting);
         }
 
         public async Task CreateAsync(CreateProductInputModel input, string userId, string imagePath)
@@ -137,5 +158,14 @@
             await this.productsRepository.SaveChangesAsync();
         }
 
+        private IEnumerable<ProductInListViewModel> SortProducts(IEnumerable<ProductInListViewModel> result, int sorting) =>
+           sorting switch
+           {
+               1 => result.OrderBy(x => x.Name).ToList(),
+               2 => result.OrderBy(x => x.Name).ToList(),
+               3 => result.OrderByDescending(x => x.Price).ToList(),
+               4 => result.OrderBy(x => x.Price).ToList(),
+               _ => result.OrderByDescending(x => x.Name).ToList(),
+           };
     }
 }

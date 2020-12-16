@@ -21,6 +21,8 @@
 
         IEnumerable<T> GetRandom<T>(int count);
 
+        public IEnumerable<ProductInListViewModel> Sort<TProductsInListViewModel>(int sorting);
+
         Task UpdateAsync(int id, EditProductInputModel input);
 
         Task DeleteAsync(int id);

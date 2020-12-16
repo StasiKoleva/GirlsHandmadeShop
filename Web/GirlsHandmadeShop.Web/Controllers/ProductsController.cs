@@ -100,6 +100,21 @@
             return this.View(product);
         }
 
+
+        public IActionResult Sort(int sorting)
+        {
+            // var product = this.productsService.Sort(sorting);
+
+            var viewModel = new ProductsListViewModel
+            {
+                ItemsPerPage = 12,
+                PageNumber = 1,
+                ProductsCount = this.productsService.GetCount(),
+                Products = this.productsService.Sort<ProductsListViewModel>(sorting),
+            };
+            return this.View("All", viewModel);
+        }
+
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Edit(int id)
         {

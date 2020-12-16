@@ -27,6 +27,7 @@
 	</div>
 </div>
 <!--== Page Title Area End ==-->
+
 <!--== Page Content Wrapper Start ==-->
 <div id="page-content-wrapper" class="p-9">
 	<div class="ruby-container">
@@ -142,6 +143,7 @@
 					</div>
 
 					<!-- Single Sidebar Item End -->
+
 					<!-- Single Sidebar Item Start -->
 
 					<div class="single-sidebar-wrap">
@@ -183,6 +185,7 @@
 				</div>
 			</div>
 			<!-- Sidebar Area End -->
+
 			<!-- Shop Page Content Start -->
 			<div class="col-lg-9 order-first order-lg-last">
 				<div class="shop-page-content-wrap">
@@ -196,15 +199,46 @@
 							<span class="show-items">Items 1 - 12 of @Model.ProductsCount</span>
 						</div>
 
+						@*<div class="product-sort_by d-flex align-items-center mt-3 mt-md-0">
+								<label for="sort">Sort By:</label>
+								<select name="sort" id="sort">
+									<option value="Position">Relevance</option>
+									<option value="Name Ascen">Name, A to Z</option>
+									<option value="Name Decen">Name, Z to A</option>
+									<option value="Price Ascen">Price low to high</option>
+									<option value="Price Decen">Price high to low</option>
+								</select>
+							</div>*@
+
+
 						<div class="product-sort_by d-flex align-items-center mt-3 mt-md-0">
 							<label for="sort">Sort By:</label>
-							<select name="sort" id="sort">
-								<option value="Position">Relevance</option>
-								<option value="Name Ascen">Name, A to Z</option>
-								<option value="Name Decen">Name, Z to A</option>
-								<option value="Price Ascen">Price low to heigh</option>
-								<option value="Price Decen">Price heigh to low</option>
-							</select>
+							<ul name="sort" id="sort">
+
+
+								<li class="dropdown-item">
+									<a asp-controller="Products" asp-action="Sort" asp-route-sorting="1">Relevance</a>
+								</li>
+
+								<li class="dropdown-item" value="Name Ascen">
+									<a asp-controller="Products" asp-action="Sort" asp-route-sorting="2">Name, A to Z</a>
+								</li>
+
+								<li class="dropdown-item" value="Name Decen">
+									<a asp-controller="Products" asp-action="Sort" asp-route-sorting="3">Name, Z to A</a>
+								</li>
+
+								<li class="dropdown-item" value="Price Ascen">
+									<a asp-controller="Products" asp-action="Sort" asp-route-sorting="4">Price low to high</a>
+								</li>
+
+								<li class="dropdown-item" value="Price Decen">
+									<a asp-controller="Products" asp-action="Sort" asp-route-sorting="5">Price high to low</a>
+								</li>
+
+
+
+							</ul>
 						</div>
 					</div>
 
@@ -281,6 +315,7 @@
 	</div>
 </div>
 <!--== Page Content Wrapper End ==-->
+
 <!--== Product Quick View Modal Area Wrap ==-->
 <div class="modal fade" id="quickView" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" role="document">
