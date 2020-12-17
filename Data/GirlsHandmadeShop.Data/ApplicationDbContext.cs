@@ -40,6 +40,10 @@
 
         public DbSet<Vote> Votes { get; set; }
 
+        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<ProductCart> ProductCarts { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
