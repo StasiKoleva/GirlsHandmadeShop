@@ -35,14 +35,18 @@
 							<div class="product-thumbnail-wrap">
 
 								<div class="product-thumb-carousel owl-carousel">
-
+									@foreach (var image in Model.Images)
+									{
 									<div class="single-thumb-item">
 										<a>
 											<img class="img-fluid"
-												 src="@Model.ImageUrl"
+												 src="@image.ImageUrl"
 												 alt="Product" />
 										</a>
+										
 									</div>
+									}
+
 								</div>
 							</div>
 
@@ -328,8 +332,6 @@
 	</div>
 </div>
 <!--== Page Content Wrapper End ==-->
-
-
 <!--== Delete Modal ==-->
 
 <div class="modal" tabindex="-1" role="dialog" id="deleteModal">

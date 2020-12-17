@@ -36,6 +36,8 @@
 
         public IEnumerable<MaterialsViewModel> Materials { get; set; }
 
+        public IEnumerable<ImagesViewModel> Images { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Product, SingleProductViewModel>()

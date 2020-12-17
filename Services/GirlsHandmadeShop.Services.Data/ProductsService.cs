@@ -171,7 +171,6 @@
                // 7 -> Bracelets
                // 8 -> Earrings
                // 9 -> Accesories
-
                1 => result.OrderBy(x => x.Name).ToList(),
                2 => result.OrderBy(x => x.Name).ToList(),
                3 => result.OrderByDescending(x => x.Price).ToList(),

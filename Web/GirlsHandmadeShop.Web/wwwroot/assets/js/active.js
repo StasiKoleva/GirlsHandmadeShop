@@ -38,7 +38,7 @@
             loop: true,
             dots: false,
             nav: false,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
             margin: 30,
             responsive: {
                 // breakpoint from 0 up
@@ -70,7 +70,7 @@
             loop: true,
             dots: false,
             nav: false,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
             margin: 30,
             responsive: {
                 // breakpoint from 0 up
@@ -107,7 +107,7 @@
             items: 2,
             dots: false,
             nav: false,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
             margin: 30,
             responsive: {
                 // breakpoint from 0 up
@@ -167,7 +167,7 @@
             dots: false,
             smartSpeed: 500,
             nav: true,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+            navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>']
         });
 
         // Home 4 Product Carousel
@@ -177,7 +177,7 @@
             dots: false,
             smartSpeed: 500,
             nav: true,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>']
+            navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>']
         });
 
         // Single Product  Carousel Js
@@ -187,7 +187,7 @@
             dots: false,
             smartSpeed: 500,
             nav: true,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
             thumbs: true,
             thumbImage: true,
             thumbContainerClass: 'owl-thumbs',

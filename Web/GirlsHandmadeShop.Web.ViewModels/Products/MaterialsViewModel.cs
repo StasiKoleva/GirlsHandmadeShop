@@ -1,9 +1,5 @@
 ﻿namespace GirlsHandmadeShop.Web.ViewModels.Products
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     using GirlsHandmadeShop.Data.Models;
     using GirlsHandmadeShop.Services.Mapping;
 
