@@ -6,15 +6,16 @@
 
     using GirlsHandmadeShop.Data.Common.Models;
 
-    public class Product : BaseDeletableModel<int>
+    public class Product : BaseDeletableModel<string>
     {
         public Product()
         {
+            this.Id = Guid.NewGuid().ToString();
             this.Materials = new HashSet<ProductMaterial>();
             this.Images = new HashSet<Image>();
             this.Comments = new HashSet<Comment>();
             this.Votes = new HashSet<Vote>();
-            this.Carts = new HashSet<ProductCart>();
+            this.CartProducts = new HashSet<CartProducts>();
         }
 
         public string Name { get; set; }
@@ -41,6 +42,6 @@
 
         public virtual ICollection<Vote> Votes { get; set; }
 
-        public virtual ICollection<ProductCart> Carts { get; set; }
+        public virtual ICollection<CartProducts> CartProducts { get; set; }
     }
 }

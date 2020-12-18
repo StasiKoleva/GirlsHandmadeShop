@@ -94,7 +94,7 @@
             return this.View(viewModel);
         }
 
-        public IActionResult ById(int id)
+        public IActionResult ById(string id)
         {
             var product = this.productsService.GetById<SingleProductViewModel>(id);
             return this.View(product);
@@ -116,7 +116,7 @@
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
             var inputModel = this.productsService.GetById<EditProductInputModel>(id);
             inputModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
@@ -125,7 +125,7 @@
 
         [HttpPost]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Edit(int id, EditProductInputModel input)
+        public async Task<IActionResult> Edit(string id, EditProductInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -139,7 +139,7 @@
 
         [HttpPost]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             await this.productsService.DeleteAsync(id);
             return this.RedirectToAction(nameof(this.All));

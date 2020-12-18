@@ -12,17 +12,17 @@
         public Cart()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Products = new HashSet<ProductCart>();
+            this.CartProducts = new HashSet<CartProducts>();
         }
 
         public int Quantity { get; set; }
 
         public decimal TotalPrice { get; set; }
 
-        public string OwnerId { get; set; }
+        public string UserId { get; set; }
 
-        public ApplicationUser Owner { get; set; }
+        public ApplicationUser User { get; set; }
 
-        public virtual ICollection<ProductCart> Products { get; set; }
+        public virtual ICollection<CartProducts> CartProducts { get; set; }
     }
 }

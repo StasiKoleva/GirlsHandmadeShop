@@ -213,11 +213,34 @@ namespace GirlsHandmadeShop.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    TotalPrice = table.Column<decimal>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Carts_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -257,6 +280,7 @@ namespace GirlsHandmadeShop.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     ProductId = table.Column<int>(nullable: false),
+                    ProductId1 = table.Column<string>(nullable: true),
                     AddedByUserId = table.Column<string>(nullable: true),
                     Text = table.Column<string>(nullable: true)
                 },
@@ -270,8 +294,8 @@ namespace GirlsHandmadeShop.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comments_Products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_Comments_Products_ProductId1",
+                        column: x => x.ProductId1,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -287,6 +311,7 @@ namespace GirlsHandmadeShop.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     ProductId = table.Column<int>(nullable: false),
+                    ProductId1 = table.Column<string>(nullable: true),
                     Extension = table.Column<string>(nullable: true),
                     AddedByUserId = table.Column<string>(nullable: true)
                 },
@@ -300,7 +325,39 @@ namespace GirlsHandmadeShop.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Images_Products_ProductId",
+                        name: "FK_Images_Products_ProductId1",
+                        column: x => x.ProductId1,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductCarts",
+                columns: table => new
+                {
+                    CartId = table.Column<string>(nullable: false),
+                    ProductId = table.Column<string>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductCarts", x => new { x.ProductId, x.CartId });
+                    table.ForeignKey(
+                        name: "FK_ProductCarts_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductCarts_Carts_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductCarts_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -314,6 +371,7 @@ namespace GirlsHandmadeShop.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(nullable: false),
+                    ProductId1 = table.Column<string>(nullable: true),
                     MaterialId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -326,8 +384,8 @@ namespace GirlsHandmadeShop.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ProductMaterials_Products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_ProductMaterials_Products_ProductId1",
+                        column: x => x.ProductId1,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -342,6 +400,7 @@ namespace GirlsHandmadeShop.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     ProductId = table.Column<int>(nullable: false),
+                    ProductId1 = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     Value = table.Column<byte>(nullable: false)
                 },
@@ -349,8 +408,8 @@ namespace GirlsHandmadeShop.Data.Migrations
                 {
                     table.PrimaryKey("PK_Votes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Votes_Products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_Votes_Products_ProductId1",
+                        column: x => x.ProductId1,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -412,6 +471,16 @@ namespace GirlsHandmadeShop.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Carts_IsDeleted",
+                table: "Carts",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Carts_UserId",
+                table: "Carts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Categories_IsDeleted",
                 table: "Categories",
                 column: "IsDeleted");
@@ -427,9 +496,9 @@ namespace GirlsHandmadeShop.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_ProductId",
+                name: "IX_Comments_ProductId1",
                 table: "Comments",
-                column: "ProductId");
+                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_AddedByUserId",
@@ -442,9 +511,9 @@ namespace GirlsHandmadeShop.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Images_ProductId",
+                name: "IX_Images_ProductId1",
                 table: "Images",
-                column: "ProductId");
+                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Materials_IsDeleted",
@@ -452,14 +521,24 @@ namespace GirlsHandmadeShop.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductCarts_ApplicationUserId",
+                table: "ProductCarts",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductCarts_CartId",
+                table: "ProductCarts",
+                column: "CartId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductMaterials_MaterialId",
                 table: "ProductMaterials",
                 column: "MaterialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductMaterials_ProductId",
+                name: "IX_ProductMaterials_ProductId1",
                 table: "ProductMaterials",
-                column: "ProductId");
+                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_AddedByUserId",
@@ -482,9 +561,9 @@ namespace GirlsHandmadeShop.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Votes_ProductId",
+                name: "IX_Votes_ProductId1",
                 table: "Votes",
-                column: "ProductId");
+                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Votes_UserId",
@@ -516,6 +595,9 @@ namespace GirlsHandmadeShop.Data.Migrations
                 name: "Images");
 
             migrationBuilder.DropTable(
+                name: "ProductCarts");
+
+            migrationBuilder.DropTable(
                 name: "ProductMaterials");
 
             migrationBuilder.DropTable(
@@ -526,6 +608,9 @@ namespace GirlsHandmadeShop.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "Materials");

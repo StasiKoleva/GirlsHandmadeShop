@@ -112,7 +112,7 @@
             return this.productsRepository.All().Count();
         }
 
-        public T GetById<T>(int id)
+        public T GetById<T>(string id)
         {
             var product = this.productsRepository.AllAsNoTracking()
                 .Where(x => x.Id == id)
@@ -140,7 +140,7 @@
                 .To<T>().ToList();
         }
 
-        public async Task UpdateAsync(int id, EditProductInputModel input)
+        public async Task UpdateAsync(string id, EditProductInputModel input)
         {
             var products = this.productsRepository.All().FirstOrDefault(x => x.Id == id);
             products.Name = input.Name;
@@ -151,7 +151,7 @@
             await this.productsRepository.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(string id)
         {
             var recipe = this.productsRepository.All().FirstOrDefault(x => x.Id == id);
             this.productsRepository.Delete(recipe);

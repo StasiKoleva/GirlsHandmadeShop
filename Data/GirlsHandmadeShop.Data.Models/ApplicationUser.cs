@@ -17,6 +17,7 @@ namespace GirlsHandmadeShop.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Votes = new HashSet<Vote>();
+            this.CartProducts = new HashSet<CartProducts>();
         }
 
         // Audit info
@@ -36,5 +37,7 @@ namespace GirlsHandmadeShop.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
+
+        public virtual ICollection<CartProducts> CartProducts { get; set; }
     }
 }

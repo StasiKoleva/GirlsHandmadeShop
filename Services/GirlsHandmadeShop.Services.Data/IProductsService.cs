@@ -17,14 +17,14 @@
 
         int GetCount();
 
-        T GetById<T>(int id);
+        T GetById<T>(string id);
 
         IEnumerable<T> GetRandom<T>(int count);
 
         public IEnumerable<ProductInListViewModel> Sort<TProductsInListViewModel>(int sorting);
 
-        Task UpdateAsync(int id, EditProductInputModel input);
+        Task UpdateAsync(string id, EditProductInputModel input);
 
-        Task DeleteAsync(int id);
+        Task DeleteAsync(string id);
     }
 }
