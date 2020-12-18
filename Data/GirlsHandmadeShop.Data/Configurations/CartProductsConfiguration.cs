@@ -15,7 +15,7 @@
         public void Configure(EntityTypeBuilder<CartProducts> builder)
         {
             builder
-                .HasKey(x => new { x.ProductId, x.CartId });
+                .HasKey(x => new { x.ProductId, x.UserId });
         }
     }
 }

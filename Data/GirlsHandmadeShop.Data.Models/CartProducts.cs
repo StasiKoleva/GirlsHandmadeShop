@@ -10,10 +10,10 @@
     {
         // Foreign Keys
         [Required]
-        [ForeignKey("Cart")]
-        public int CartId { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
 
-        public virtual Cart Cart { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Required]
         [ForeignKey("Product")]

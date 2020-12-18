@@ -179,59 +179,20 @@ namespace GirlsHandmadeShop.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
-
-                    b.ToTable("Carts");
-                });
-
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.CartProducts", b =>
                 {
                     b.Property<string>("ProductId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId", "CartId");
+                    b.HasKey("ProductId", "UserId");
 
-                    b.HasIndex("CartId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("CartProducts");
                 });
@@ -588,24 +549,17 @@ namespace GirlsHandmadeShop.Data.Migrations
                         .HasForeignKey("ProductId1");
                 });
 
-            modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Cart", b =>
-                {
-                    b.HasOne("GirlsHandmadeShop.Data.Models.ApplicationUser", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("GirlsHandmadeShop.Data.Models.Cart", "UserId");
-                });
-
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.CartProducts", b =>
                 {
-                    b.HasOne("GirlsHandmadeShop.Data.Models.Cart", "Cart")
-                        .WithMany("CartProducts")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("GirlsHandmadeShop.Data.Models.Product", "Product")
                         .WithMany("CartProducts")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("GirlsHandmadeShop.Data.Models.ApplicationUser", "User")
+                        .WithMany("CartProducts")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

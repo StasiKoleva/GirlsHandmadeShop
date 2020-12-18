@@ -1,16 +1,17 @@
-﻿using GirlsHandmadeShop.Common;
-using GirlsHandmadeShop.Data.Models;
-using GirlsHandmadeShop.Services.Data;
-using GirlsHandmadeShop.Web.ViewModels.Carts;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GirlsHandmadeShop.Web.Controllers
+﻿namespace GirlsHandmadeShop.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using GirlsHandmadeShop.Common;
+    using GirlsHandmadeShop.Data.Models;
+    using GirlsHandmadeShop.Services.Data;
+    using GirlsHandmadeShop.Web.ViewModels.Carts;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class CartsController : Controller
     {
 
@@ -19,8 +20,7 @@ namespace GirlsHandmadeShop.Web.Controllers
         private readonly UserManager<ApplicationUser> userManager;
 
         public CartsController(
-            ICartsService cartsService, IProductsService productService, UserManager<ApplicationUser> userManager
-            )
+            ICartsService cartsService, IProductsService productService, UserManager<ApplicationUser> userManager)            
         {
             this.cartsService = cartsService;
             this.userManager = userManager;
@@ -29,21 +29,6 @@ namespace GirlsHandmadeShop.Web.Controllers
 
         public IActionResult All()
         {
-            //var currentUserId = this.userService.GetUserId(this.User.Identity.Name);
-            //var productsInCart = this.cartService.GetAllProductsFromCart(currentUserId);
-
-            //var complexModel = new ComplexModel<List<BuyProductInputModel>, List<ProductCartViewModel>>
-            //{
-            //    ViewModel = productsInCart
-            //};
-
-            //if (TempData.ContainsKey(GlobalConstants.ErrorsFromPOSTRequest))
-            //{
-            //    //Merge model states
-            //    ModelStateHelper.MergeModelStates(TempData, this.ModelState);
-            //}
-
-            //return this.View(complexModel);
             return this.View();
         }
 
@@ -54,14 +39,9 @@ namespace GirlsHandmadeShop.Web.Controllers
             var productId = input.ProductId;
             var quantity = input.Quantity;
 
-            // var product = this.productService.GetById<AddToCartInputModel>(productId);
-
-
             await this.cartsService.AddToCartAsync(productId, user.Id, quantity);
 
             return this.RedirectToAction(nameof(this.All));
-
-            //return this.View();
         }
     }
 }

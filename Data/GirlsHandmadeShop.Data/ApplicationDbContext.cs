@@ -40,8 +40,6 @@
 
         public DbSet<Vote> Votes { get; set; }
 
-        public DbSet<Cart> Carts { get; set; }
-
         public DbSet<CartProducts> CartProducts { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
