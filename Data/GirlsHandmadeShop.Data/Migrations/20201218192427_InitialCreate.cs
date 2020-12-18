@@ -216,7 +216,8 @@ namespace GirlsHandmadeShop.Data.Migrations
                 name: "Carts",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -265,6 +266,31 @@ namespace GirlsHandmadeShop.Data.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartProducts",
+                columns: table => new
+                {
+                    CartId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<string>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartProducts", x => new { x.ProductId, x.CartId });
+                    table.ForeignKey(
+                        name: "FK_CartProducts_Carts_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CartProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -327,38 +353,6 @@ namespace GirlsHandmadeShop.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Images_Products_ProductId1",
                         column: x => x.ProductId1,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductCarts",
-                columns: table => new
-                {
-                    CartId = table.Column<string>(nullable: false),
-                    ProductId = table.Column<string>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductCarts", x => new { x.ProductId, x.CartId });
-                    table.ForeignKey(
-                        name: "FK_ProductCarts_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProductCarts_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProductCarts_Products_ProductId",
-                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -471,6 +465,11 @@ namespace GirlsHandmadeShop.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartProducts_CartId",
+                table: "CartProducts",
+                column: "CartId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Carts_IsDeleted",
                 table: "Carts",
                 column: "IsDeleted");
@@ -478,7 +477,9 @@ namespace GirlsHandmadeShop.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_UserId",
                 table: "Carts",
-                column: "UserId");
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_IsDeleted",
@@ -519,16 +520,6 @@ namespace GirlsHandmadeShop.Data.Migrations
                 name: "IX_Materials_IsDeleted",
                 table: "Materials",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCarts_ApplicationUserId",
-                table: "ProductCarts",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCarts_CartId",
-                table: "ProductCarts",
-                column: "CartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductMaterials_MaterialId",
@@ -589,13 +580,13 @@ namespace GirlsHandmadeShop.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "CartProducts");
+
+            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Images");
-
-            migrationBuilder.DropTable(
-                name: "ProductCarts");
 
             migrationBuilder.DropTable(
                 name: "ProductMaterials");

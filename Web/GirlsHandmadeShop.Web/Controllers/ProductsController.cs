@@ -17,7 +17,6 @@
 
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext db;
         private readonly ICategoriesService categoriesService;
         private readonly IProductsService productsService;
         private readonly UserManager<ApplicationUser> userManager;

@@ -7,11 +7,11 @@
 
     using GirlsHandmadeShop.Data.Common.Models;
 
-    public class Cart : BaseDeletableModel<string>
+    public class Cart : BaseDeletableModel<int>
     {
         public Cart()
         {
-            this.Id = Guid.NewGuid().ToString();
+
             this.CartProducts = new HashSet<CartProducts>();
         }
 

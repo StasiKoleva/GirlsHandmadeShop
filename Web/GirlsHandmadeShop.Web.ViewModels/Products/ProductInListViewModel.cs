@@ -24,6 +24,8 @@
 
         public int CategoryId { get; set; }
 
+        public int QuantityInStock { get; set; }
+
         public string CategoryName { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }

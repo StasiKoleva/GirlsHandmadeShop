@@ -8,6 +8,17 @@
 	<div class="alert alert-success">@this.TempData["Message"]</div>
 }
 
+@*@model ComplexModel<GirlsHandmadeShop.Web.ViewModels.Carts.AddToCartInputModel, GirlsHandmadeShop.Web.ViewModels.Products.ProductsListViewModel>
+@{
+
+}
+
+}
+@{
+	var viewModel = Model.ViewModel;
+	var inputModel = Model.InputModel;
+}*@
+
 @*<h1>@this.ViewData["Title"]</h1>*@
 
 <!--== Page Title Area Start ==-->
@@ -195,7 +206,7 @@
 							</ul>
 							<span class="show-items">Items 1 - 12 of @Model.ProductsCount</span>
 						</div>
-						@*Some CSS style added out of the theme*@						
+						@*Some CSS style added out of the theme*@
 						<style>
 							.dropbtn {
 								background-color: #d82e2e;
@@ -324,11 +335,26 @@
 												<p class="products-desc">
 													@product.Description
 												</p>
-												<a href="single-product.html" class="btn btn-add-to-cart">+ Add to Cart</a>
+												@*<a asp-controller="Carts" asp-action="AddToCart" type="submit" class="btn btn-add-to-cart">+ Add to Cart</a>*@
 												<a href="single-product.html" class="btn btn-add-to-cart btn-whislist">
 													+
 													Wishlist
 												</a>
+
+												<div class="btn-group cart product-page-addToCart-container">
+													<form method="post" class="product-page-addToCart-form">
+														<input type="hidden" name="ProductId" value="@Model.Products.FirstOrDefault().Id" />
+														<input type="hidden" name="Quantity" class="product-page-addToCart-quantityInStock" value=1 />
+														<button asp-controller="Carts" asp-action="AddToCart" type="submit" class="btn btn-add-to-cart">
+															Add to Cart
+														</button>
+														<label for="Quantity" class="product-page-addToCart-quantity-label">Qty:</label>
+														<input type="number" class="product-page-addToCart-quantity" name="Quantity" value="1" />
+														<div class="product-page-addToCart-validationMessage-container">
+
+														</div>
+													</form>
+												</div>
 
 											</div>
 
@@ -367,8 +393,6 @@
 	</div>
 </div>
 <!--== Page Content Wrapper End ==-->
-
-
 <!--== Product Quick View Modal Area Wrap ==-->
 <div class="modal fade" id="quickView" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -379,7 +403,7 @@
 			<div class="modal-body">
 				<div class="quick-view-content single-product-page-content">
 					<div class="row">
-						 @*Product Thumbnail Start*@ 
+						@*Product Thumbnail Start*@
 						<div class="col-lg-5 col-md-6">
 							<div class="product-thumbnail-wrap">
 								<div class="product-thumb-carousel owl-carousel">
@@ -391,13 +415,13 @@
 												 alt="Product" />
 										</a>
 
-									</div>									
+									</div>
 								</div>
 							</div>
 						</div>
 
-						 @*Product Thumbnail End 
-						 Product Details Start*@ 
+						@*Product Thumbnail End
+							Product Details Start*@
 
 						<div class="col-lg-7 col-md-6 mt-5 mt-md-0">
 							<div class="product-details">
@@ -460,7 +484,7 @@
 								</div>
 							</div>
 						</div>
-						 @*Product Details End*@ 
+						@*Product Details End*@
 					</div>
 				</div>
 			</div>

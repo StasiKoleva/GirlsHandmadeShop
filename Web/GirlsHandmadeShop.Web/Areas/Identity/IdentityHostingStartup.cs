@@ -1,4 +1,5 @@
 ﻿using System;
+
 using GirlsHandmadeShop.Data;
 using GirlsHandmadeShop.Data.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: HostingStartup(typeof(GirlsHandmadeShop.Web.Areas.Identity.IdentityHostingStartup))]
+
 namespace GirlsHandmadeShop.Web.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup

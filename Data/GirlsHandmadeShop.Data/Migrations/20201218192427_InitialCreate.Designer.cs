@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GirlsHandmadeShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201218131143_InitialCreate")]
+    [Migration("20201218192427_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,8 +183,10 @@ namespace GirlsHandmadeShop.Data.Migrations
 
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Cart", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -211,7 +213,9 @@ namespace GirlsHandmadeShop.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Carts");
                 });
@@ -221,22 +225,17 @@ namespace GirlsHandmadeShop.Data.Migrations
                     b.Property<string>("ProductId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CartId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId", "CartId");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("CartId");
 
-                    b.ToTable("ProductCarts");
+                    b.ToTable("CartProducts");
                 });
 
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Category", b =>
@@ -594,16 +593,12 @@ namespace GirlsHandmadeShop.Data.Migrations
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.Cart", b =>
                 {
                     b.HasOne("GirlsHandmadeShop.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithOne("Cart")
+                        .HasForeignKey("GirlsHandmadeShop.Data.Models.Cart", "UserId");
                 });
 
             modelBuilder.Entity("GirlsHandmadeShop.Data.Models.CartProducts", b =>
                 {
-                    b.HasOne("GirlsHandmadeShop.Data.Models.ApplicationUser", null)
-                        .WithMany("CartProducts")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("GirlsHandmadeShop.Data.Models.Cart", "Cart")
                         .WithMany("CartProducts")
                         .HasForeignKey("CartId")

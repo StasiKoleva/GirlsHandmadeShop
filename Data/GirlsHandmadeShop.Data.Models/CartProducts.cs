@@ -11,7 +11,7 @@
         // Foreign Keys
         [Required]
         [ForeignKey("Cart")]
-        public string CartId { get; set; }
+        public int CartId { get; set; }
 
         public virtual Cart Cart { get; set; }
 
