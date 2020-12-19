@@ -20,7 +20,7 @@
         private readonly UserManager<ApplicationUser> userManager;
 
         public CartsController(
-            ICartsService cartsService, IProductsService productService, UserManager<ApplicationUser> userManager)            
+            ICartsService cartsService, IProductsService productService, UserManager<ApplicationUser> userManager)
         {
             this.cartsService = cartsService;
             this.userManager = userManager;
@@ -29,7 +29,15 @@
 
         public IActionResult All()
         {
-            return this.View();
+            var currentUserId = this.userManager.GetUserId(this.User);
+
+            var productsInCart = this.cartsService.GetAllProductsFromCart<BaseProductInCartViewModel>(currentUserId);
+
+            var viewModel = new ProductsListInCartViewModel
+            {
+                Products = productsInCart,
+            };
+            return this.View(viewModel);
         }
 
         [HttpPost]

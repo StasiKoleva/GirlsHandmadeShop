@@ -10,5 +10,7 @@
     public interface ICartsService
     {
         Task AddToCartAsync(string productId, string userId, int quantity = 1);
+
+        IEnumerable<BaseProductInCartViewModel> GetAllProductsFromCart<BaseProductInCartViewModel>(string userId);
     }
 }
