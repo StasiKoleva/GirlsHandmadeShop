@@ -26,22 +26,25 @@
 
         public async Task AddToCartAsync(string productId, string userId, int quantity = 1)
         {
-            var cartProduct = new CartProducts { UserId = userId, ProductId = productId, Quantity = quantity };
 
-            if (this.ProductIsInCart(productId, userId))
+            if (this.IsProductAlreadyInCart(productId, userId))
             {
                 var productCart = this.GetProductFromCart(productId, userId);
                 productCart.Quantity += quantity;
             }
             else
             {
+                var cartProduct = new CartProducts { UserId = userId, ProductId = productId, Quantity = quantity };
+
                 await this.cartsRepository.AddAsync(cartProduct);
             }
 
             await this.cartsRepository.SaveChangesAsync();
         }
 
-        public bool ProductIsInCart(string productId, string userId)
+
+
+        public bool IsProductAlreadyInCart(string productId, string userId)
         {
             return this.cartsRepository.All().Any(x => x.ProductId == productId && x.UserId == userId);
         }
@@ -53,18 +56,32 @@
 
         public IEnumerable<BaseProductInCartViewModel> GetAllProductsFromCart<BaseProductInCartViewModel>(string userId)
         {
-            //return this.cartsRepository.All().Where(x => x.UserId == userId).Select(x => new BaseProductInCartViewModel
-            //{
-            //    ImageUrl = x.Product.Images.First(),
-            //    Name = x.Product.Name,
-            //    Price = x.Product.Price,
-            //    Id = x.Product.Id,
-            //    Quantity = x.Quantity,
-            //}).ToList();
-
-             var productsInCart = this.cartsRepository.All().Where(x => x.UserId == userId).To<BaseProductInCartViewModel>().ToList();
+            var productsInCart = this.cartsRepository.All()
+                .Where(x => x.UserId == userId)
+                .To<BaseProductInCartViewModel>()
+                .ToList();
 
             return productsInCart;
+        }
+
+        public async Task<int> GetProductsCountInCart(string userId)
+        {
+            var productsCount = this.cartsRepository.All()
+               .Select(x => new
+               {
+                   UserId = x.UserId,
+                   Product = x.Product,
+               })
+               .Where(x => x.UserId == userId && x.Product.IsDeleted == false)
+               .Count();
+
+            return productsCount;
+        }
+
+        public async Task RemoveProductFromCart(string userId, string productId)
+        {
+            this.cartsRepository.Delete(this.GetProductFromCart(productId, userId));
+            await this.cartsRepository.SaveChangesAsync();
         }
     }
 }

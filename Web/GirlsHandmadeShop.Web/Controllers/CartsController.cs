@@ -51,5 +51,13 @@
 
             return this.RedirectToAction(nameof(this.All));
         }
+
+        public async Task<IActionResult> Remove(string productId)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            await this.cartsService.RemoveProductFromCart(user.Id, productId);
+
+            return this.RedirectToAction(nameof(this.All));
+        }
     }
 }

@@ -29,7 +29,7 @@
 								<h4>New Collection 2021</h4>
 								<h2>Beautiful Earrings</h2>
 								<p>Check our our newest jewelry pieces.</p>
-								<a a asp-area="" asp-controller="Products" asp-action="All" class="btn-long-arrow">Shop Now</a>
+								<a asp-area="" asp-controller="Products" asp-action="All" class="btn-long-arrow">Shop Now</a>
 							</div>
 						</div>
 						<!-- Banner Single Carousel End -->
@@ -73,7 +73,7 @@
 										<i class="fa fa-star-o"></i>
 									</div>
 									<span class="price">$@product.Price</span>
-									<a href="single-product.html" class="btn btn-add-to-cart">+ Add to Cart</a>
+									<a asp-controller="Products" asp-action="ById" asp-route-id="@product.Id" class="btn btn-add-to-cart">View Details</a>
 								</div>
 								<span class="product-bedge">New</span>
 							</div>

@@ -1,0 +1,46 @@
+﻿@model GirlsHandmadeShop.Web.ViewModels.Carts.ProductsListInCartViewModel
+
+<li class="shop-cart cart-body">
+	<a asp-area="" asp-controller="Carts" asp-action="All">
+		<i class="fa fa-shopping-bag"></i> <span class="count">@Model.ProductsCount</span>
+	</a>
+	<div class="mini-cart">
+		<div class="mini-cart-body">
+			@if (!Model.Products.Any())
+			{
+				<h2 class="text-center">No products in cart yet!</h2>
+			}
+			@foreach (var product in Model.Products)
+
+			{
+				<div class="single-cart-item d-flex">
+					<figure class="product-thumb">
+
+						<a asp-controller="Products" asp-action="ById" asp-route-id="@product.ProductId">
+							<img class="img-fluid" src="@product.ImageUrl"
+								 alt="Products" />
+						</a>
+					</figure>
+
+					<div class="product-details">
+
+
+						<h2><a sp-controller="Products" asp-action="ById" asp-route-id="@product.ProductId">@product.Name</a></h2>
+						<div class="cal d-flex align-items-center">
+							<span class="quantity">@product.Quantity</span>
+							<span class="multiplication">X</span>
+							<span class="price">$@product.Price</span>
+						</div>
+
+						<a asp-controller="Carts" asp-action="Remove" asp-route-productId="@product.ProductId" class="remove-icon"><i class="fa fa-trash-o"></i></a>
+
+					</div>
+				</div>
+			}
+
+			<div class="mini-cart-footer">
+				<a href="checkout.html" class="btn-add-to-cart">Checkout</a>
+			</div>
+		</div>
+	</div>
+</li>

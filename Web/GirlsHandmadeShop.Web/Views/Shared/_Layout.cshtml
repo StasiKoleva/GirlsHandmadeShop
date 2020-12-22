@@ -1,4 +1,6 @@
 ﻿@using GirlsHandmadeShop.Common
+
+
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -68,10 +70,10 @@
 												All Categories
 											</a>
 											<ul>
-												<li><a  asp-controller="Products" asp-action="Sort" asp-route-sorting="6">Necklaces</a></li>
-												<li><a  asp-controller="Products" asp-action="Sort" asp-route-sorting="7">Bracelets</a></li>
-												<li><a  asp-controller="Products" asp-action="Sort" asp-route-sorting="8">Earrings</a></li>
-												<li><a  asp-controller="Products" asp-action="Sort" asp-route-sorting="9">Accessories</a></li>
+												<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="6">Necklaces</a></li>
+												<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="7">Bracelets</a></li>
+												<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="8">Earrings</a></li>
+												<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="9">Accessories</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -147,36 +149,44 @@
 										</dl>*@
 								</div>
 							</li>
-							<li class="shop-cart">
-								<a href="#">
-									<i class="fa fa-shopping-bag"></i> <span class="count">1</span>
-								</a>
-								<div class="mini-cart">
-									<div class="mini-cart-body">
-										<div class="single-cart-item d-flex">
-											<figure class="product-thumb">
-												<a href="#">
-													<img class="img-fluid" src="~/assets/img/product-1.jpg"
-														 alt="Products" />
-												</a>
-											</figure>
 
-											<div class="product-details">
-												<h2><a href="#">Sprite Yoga Companion</a></h2>
-												<div class="cal d-flex align-items-center">
-													<span class="quantity">3</span>
-													<span class="multiplication">X</span>
-													<span class="price">$77.00</span>
+							@*<partial name="_CartInLayoutPartial" />*@
+							<vc:cart-body title="CartBody"></vc:cart-body>
+							@*<li class="shop-cart">
+									<a asp-area="" asp-controller="Carts" asp-action="All">
+										<i class="fa fa-shopping-bag"></i> <span class="count">1</span>
+									</a>
+									<div class="mini-cart">
+										<div class="mini-cart-body">
+											<div class="single-cart-item d-flex">
+												<figure class="product-thumb">
+													<a href="#">
+														<img class="img-fluid" src="~/assets/img/product-1.jpg"
+															 alt="Products" />
+													</a>
+												</figure>
+
+												<div class="product-details">
+
+
+														<h2><a href="#"></a></h2>
+														<div class="cal d-flex align-items-center">
+															<span class="quantity">3</span>
+															<span class="multiplication">X</span>
+															<span class="price">$</span>
+														</div>
+
+
 												</div>
+
+												<a href="#" class="remove-icon"><i class="fa fa-trash-o"></i></a>
 											</div>
-											<a href="#" class="remove-icon"><i class="fa fa-trash-o"></i></a>
-										</div>
-										<div class="mini-cart-footer">
-											<a href="checkout.html" class="btn-add-to-cart">Checkout</a>
+											<div class="mini-cart-footer">
+												<a href="checkout.html" class="btn-add-to-cart">Checkout</a>
+											</div>
 										</div>
 									</div>
-								</div>
-							</li>
+								</li>*@
 						</ul>
 					</div>
 				</div>

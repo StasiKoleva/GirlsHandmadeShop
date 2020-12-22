@@ -57,7 +57,7 @@
 										<div class="pro-qty"><input type="text" value="@product.Quantity"></div>
 									</td>
 									<td class="pro-subtotal"><span>$@product.TotalProductsPrice</span></td>
-									<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+									<td class="pro-remove"><a asp-controller="Carts" asp-action="Remove" asp-route-productId="@product.ProductId"><i class="fa fa-trash-o"></i></a></td>
 								</tr>
 							</tbody>
 						}
@@ -89,15 +89,15 @@
 							<table class="table table-bordered">
 								<tr>
 									<td>Sub Total</td>
-									<td>$230</td>
+									<td>$@Model.Products.Sum(x=>x.TotalProductsPrice)</td>
 								</tr>
 								<tr>
 									<td>Shipping</td>
-									<td>$70</td>
+									<td>$5</td>
 								</tr>
 								<tr>
 									<td>Total</td>
-									<td class="total-amount">$300</td>
+									<td class="total-amount">$@Model.Products.Sum(x=>x.TotalProductsPrice + 5)</td>
 								</tr>
 							</table>
 						</div>

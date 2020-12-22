@@ -12,7 +12,7 @@
 
     public class BaseProductInCartViewModel : IMapFrom<CartProducts>, IHaveCustomMappings
     {
-       // public string Id { get; set; }
+        public string ProductId { get; set; }
 
         public string ImageUrl { get; set; }
 
@@ -20,15 +20,11 @@
 
         public decimal Price { get; set; }
 
-       // public string UserId { get; set; }
-
-       // public string ProductId { get; set; }
+       // public decimal Shipping { get; set; }
 
         public int Quantity { get; set; }
 
         public decimal TotalProductsPrice => this.Quantity * this.Price;
-
-       // public decimal TotalCartPrice { get { return this.Sum(this.TotalProductsPrice); } }
 
         public void CreateMappings(IProfileExpression configuration)
         {
