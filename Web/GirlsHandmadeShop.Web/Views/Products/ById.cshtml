@@ -37,14 +37,14 @@
 								<div class="product-thumb-carousel owl-carousel">
 									@foreach (var image in Model.Images)
 									{
-									<div class="single-thumb-item">
-										<a>
-											<img class="img-fluid"
-												 src="@image.ImageUrl"
-												 alt="Product" />
-										</a>
-										
-									</div>
+										<div class="single-thumb-item">
+											<a>
+												<img class="img-fluid"
+													 src="@image.ImageUrl"
+													 alt="Product" />
+											</a>
+
+										</div>
 									}
 
 								</div>
@@ -82,13 +82,27 @@
 									</div>
 								}
 
+								@*<div class="rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-half"></i>
+										<i class="fa fa-star-o"></i>
+									</div>*@
 								<div class="rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-half"></i>
-									<i class="fa fa-star-o"></i>
+
+									<ul class="item-rating rating nav-item d-inline-flex">
+										<li class="star-fill" data-vote="1"><i class="fa fa-star"></i></li>
+										<li class="star-fill" data-vote="2"><i class="fa fa-star"></i></li>
+										<li class="star-fill" data-vote="3"><i class="fa fa-star"></i></li>
+										<li class="star-fill" data-vote="4"><i class="fa fa-star"></i></li>
+										<li class="star-fill" data-vote="5"><i class="fa fa-star"></i></li>
+										<li><span id="averageVoteValue">@Model.AverageVote.ToString("0.0")</span><span> / 5</span> </li>
+									</ul>
+
+
 								</div>
+
 
 								<span class="price">$@Model.Price</span>
 
@@ -143,12 +157,12 @@
 								</div>
 
 								<div class="product-quantity d-flex align-items-center">
-									<a  target="_blank" class="btn btn-add-to-cart">
+									<a target="_blank" class="btn btn-add-to-cart">
 										<i class="fa fa-shopping-cart"></i> Buy Now
 									</a>
 								</div>
 
-								
+
 
 
 
@@ -290,13 +304,14 @@
 															<div class="ratting-form row">
 																<div class="col-12 mb-4">
 																	<h5>Rating:</h5>
-																	<div class="ratting-star fix">
-																		<i class="fa fa-star-o"></i>
-																		<i class="fa fa-star-o"></i>
-																		<i class="fa fa-star-o"></i>
-																		<i class="fa fa-star-o"></i>
-																		<i class="fa fa-star-o"></i>
-																	</div>
+																	<ul class="ratting-star fix">
+																		<li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
+																		<li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
+																		<li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
+																		<li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
+																		<li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
+																		<li><span id="averageVoteValue">@Model.AverageVote.ToString("0.0")</span><span> / 5</span> </li>
+																	</ul>
 																</div>
 																<div class="col-md-6 col-12 mb-4">
 																	<label for="name">Name:</label>
@@ -334,6 +349,33 @@
 	</div>
 </div>
 <!--== Page Content Wrapper End ==-->
+
+<form method="post" id="antiForgeryForm"></form>
+@section Scripts {
+	<script>
+        $("li[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var productId = @Model.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+				var data = { productId: productId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Votes",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
+	</script>
+}
+
 <!--== Delete Modal ==-->
 
 <div class="modal" tabindex="-1" role="dialog" id="deleteModal">

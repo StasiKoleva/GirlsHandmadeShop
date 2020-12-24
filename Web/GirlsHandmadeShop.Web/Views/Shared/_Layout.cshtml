@@ -313,6 +313,15 @@
 	<a href="#" class="scrolltotop"><i class="fa fa-angle-up"></i></a>
 	<!-- Scroll to Top End -->
 	<!--=======================Javascript============================-->
+
+
+	<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+	<script src="~/js/site.min.js" asp-append-version="true"></script>
+	<script src="~/lib/datatables/media/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+
 	<!--=== Jquery Min Js ===-->
 	<script src="~/assets/js/vendor/jquery-3.3.1.min.js"></script>
 	<!--=== Jquery Migrate Min Js ===-->
@@ -328,6 +337,9 @@
 	<script src="~/assets/js/active.js"></script>
 
 	@await this.RenderSectionAsync("Scripts", required: false)
+
+
+
 </body>
 
 </html>
