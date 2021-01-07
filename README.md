@@ -1,2 +1,2 @@
-# GirlsHandmadeShop
- SoftUni Web Project
+# GirlsHandmadeShop - online jewelry store
+ My first web project - still developing
