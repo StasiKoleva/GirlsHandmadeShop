@@ -171,6 +171,22 @@
                // 7 -> Bracelets
                // 8 -> Earrings
                // 9 -> Accesories
+
+               // 10 ->$0.00 - $20.00
+               // 11 -> $21.00 - $40.00
+               // 12 -> $41.00 - $60.00
+               // 13 -> $61.00 - $80.00
+               // 14 -> $81.00 - $100.00
+               // 15 -> $100.00+
+
+               // 16 -> Swarovski pearls
+               // 17 -> Swarovski crystals
+               // 18 -> Natural stones
+               // 19 -> Japanese beads
+               // 20 -> Czech beads
+               // 21 -> Silver hooks
+
+
                1 => result.OrderBy(x => x.Name).ToList(),
                2 => result.OrderBy(x => x.Name).ToList(),
                3 => result.OrderByDescending(x => x.Name).ToList(),
@@ -180,6 +196,18 @@
                7 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Bracelets").ToList(),
                8 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Earrings").ToList(),
                9 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Accessories").ToList(),
+               10 => result.OrderBy(x => x.Price).Where(x => x.Price >= 0 && x.Price <= 20).ToList(),
+               11 => result.OrderBy(x => x.Price).Where(x => x.Price >= 21 && x.Price <= 40).ToList(),
+               12 => result.OrderBy(x => x.Price).Where(x => x.Price >= 41 && x.Price <= 60).ToList(),
+               13 => result.OrderBy(x => x.Price).Where(x => x.Price >= 61 && x.Price <= 80).ToList(),
+               14 => result.OrderBy(x => x.Price).Where(x => x.Price >= 81 && x.Price <= 100).ToList(),
+               15 => result.OrderBy(x => x.Price).Where(x => x.Price >= 101).ToList(),
+               //16 => result.OrderBy(x => x.Materials.Any(x => x.Name == "Swarovski pearls")).ToList(),
+               //17 => result.OrderBy(x => x.Materials.Any(x => x.Name == "Swarovski crystals")).ToList(),
+               //18 => result.OrderBy(x => x.Materials.Any(x => x.Name == "Natural stones")).ToList(),
+               //19 => result.OrderBy(x => x.Materials.Any(x => x.Name == "Japanese beads")).ToList(),
+               //20 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Czech beads").ToList(),
+               //21 => result.OrderBy(x => x.Materials.Any(x => x.Name == "Silver hooks")).ToList(),
                _ => result.OrderByDescending(x => x.Name).ToList(),
            };
     }

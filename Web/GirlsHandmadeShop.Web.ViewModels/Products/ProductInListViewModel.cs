@@ -30,12 +30,19 @@
 
         public virtual ICollection<Image> Images { get; set; }
 
+        //public virtual ICollection<Material> Materials { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Product, ProductInListViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                     opt.MapFrom(x =>
-                        "/images/products/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+                        "/images/products/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
+
+                //.ForMember(x => x.Materials., opt =>
+                //     opt.MapFrom(x =>
+                //     x.Materials))
+                ;
         }
     }
 }

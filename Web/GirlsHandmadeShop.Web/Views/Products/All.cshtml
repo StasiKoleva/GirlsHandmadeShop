@@ -38,6 +38,7 @@
 	</div>
 </div>
 <!--== Page Title Area End ==-->
+
 <!--== Page Content Wrapper Start ==-->
 <div id="page-content-wrapper" class="p-9">
 	<div class="ruby-container">
@@ -98,31 +99,12 @@
 
 								<div class="shopping-option-item">
 									<h4>CATEGORIES</h4>
-									<ul class="sidebar-list">
-										<li><a href="#">Dolce (19)</a></li>
-										<li><a href="#">Gabbana (4)</a></li>
-										<li><a href="#">Nike (3)</a></li>
-										<li><a href="#">Nokia (5)</a></li>
-										<li><a href="#">Xiaomi (7)</a></li>
-										<li><a href="#">Other (33)</a></li>
-									</ul>
-								</div>
 
-								<div class="single-sidebar-wrap">
-									<div class="text-lg-right">
-										<a href="#" class="btn-add-to-cart">FILTER</a>
-									</div>
-								</div>
-
-								<div class="shopping-option-item">
-									<h4>MATERIALS</h4>
 									<ul class="sidebar-list">
-										<li><a href="#">Dolce (19)</a></li>
-										<li><a href="#">Gabbana (4)</a></li>
-										<li><a href="#">Nike (3)</a></li>
-										<li><a href="#">Nokia (5)</a></li>
-										<li><a href="#">Xiaomi (7)</a></li>
-										<li><a href="#">Other (33)</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="6">Necklaces</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="7">Bracelets</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="8">Earrings</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="9">Accessories</a></li>
 									</ul>
 								</div>
 
@@ -135,14 +117,36 @@
 								<div class="shopping-option-item">
 									<h4>Price</h4>
 									<ul class="sidebar-list">
-										<li><a href="#">$0.00 - $9.99 (2)</a></li>
-										<li><a href="#">$10.00 - $19.99 (3)</a></li>
-										<li><a href="#">$20.00 - $29.99 (5)</a></li>
-										<li><a href="#">$30.00 - $39.99 (2)</a></li>
-										<li><a href="#">$40.00 - $49.99 (10)</a></li>
-										<li><a href="#">$50.00 - $59.99 (12)</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="10">$0.00 - $20.00</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="11">$21.00 - $40.00</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="12">$41.00 - $60.00</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="13">$61.00 - $80.00</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="14">$81.00 - $100.00</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="15">$100.00+</a></li>
 									</ul>
 								</div>
+								<div class="single-sidebar-wrap">
+									<div class="text-lg-right">
+										<a href="#" class="btn-add-to-cart">FILTER</a>
+									</div>
+								</div>
+
+								<div class="shopping-option-item">
+									<h4>MATERIALS</h4>
+
+									<ul class="sidebar-list">
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="16">Swarovski pearls</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="17">Swarovski crystals</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="18">Natural stones</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="19">Japanese beads</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="20">Czech beads</a></li>
+										<li><a asp-controller="Products" asp-action="Sort" asp-route-sorting="21">Silver hooks</a></li>
+									</ul>
+								</div>
+
+
+
+
 							</div>
 						</div>
 					</div>
