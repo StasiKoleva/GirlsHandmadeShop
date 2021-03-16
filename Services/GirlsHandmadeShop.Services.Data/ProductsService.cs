@@ -173,9 +173,9 @@
                // 9 -> Accesories
                1 => result.OrderBy(x => x.Name).ToList(),
                2 => result.OrderBy(x => x.Name).ToList(),
-               3 => result.OrderByDescending(x => x.Price).ToList(),
+               3 => result.OrderByDescending(x => x.Name).ToList(),
                4 => result.OrderBy(x => x.Price).ToList(),
-               5 => result.OrderBy(x => x.Price).ToList(),
+               5 => result.OrderByDescending(x => x.Price).ToList(),
                6 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Necklaces").ToList(),
                7 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Bracelets").ToList(),
                8 => result.OrderBy(x => x.Name).Where(x => x.CategoryName == "Earrings").ToList(),
